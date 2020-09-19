@@ -8,7 +8,20 @@ outputfiles: /home/ali/
 #5.1.8 Ensure cron is restricted to authorized users
 allowd_hosts: "ALL: 0.0.0.0/0.0.0.0, 192.168.2.0/255.255.255.0"
 # 5.2.17 Ensure SSH access is limited
-allowed_users: ali saleh baker root
-allowed_groups: root root
+allowed_users: ali saleh baker root #Put None or list of users space between each user
+allowed_groups: None
 deny_users: None
 deny_groups: None
+# 5.4.1.1 Ensure password expiration is 365 days or less
+pass_expire_in_days: 300
+pass_warn_age: 7
+pass_min_days: 1
+# 5.4.1.1 Ensure password expiration is 365 days or less
+list_of_os_users:
+  - ali
+
+#5.4.1.4 Ensure inactive password lock is 30 days or less
+#Note: A value of -1 would disable this setting
+account_inactive: 30
+# 5.4.5 Ensure default user shell timeout is 900 seconds or less
+shell_timeout_sec: 900

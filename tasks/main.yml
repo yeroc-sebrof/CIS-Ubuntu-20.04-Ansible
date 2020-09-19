@@ -14,5 +14,5 @@
 - include: section_5_Access_Authentication_and_Authorization.yaml
   become: true
 
-# - include: section_6_System_Maintenance.yaml
-#   become: true
+- include: section_6_System_Maintenance.yaml
+  become: true
