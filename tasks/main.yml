@@ -8,8 +8,8 @@
 # - include: section_3_Network_Configuration.yaml
 #   become: true
 
-# - include: section_4_Logging_and_Auditing.yaml
-#   become: true
+- include: section_4_Logging_and_Auditing.yaml
+  become: true
 
 - include: section_5_Access_Authentication_and_Authorization.yaml
   become: true

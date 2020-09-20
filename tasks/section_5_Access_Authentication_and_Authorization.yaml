@@ -727,6 +727,7 @@
         dest: /etc/login.defs
         regexp: '^UMASK\s'
         line: "UMASK 027"
+        mode: "0666"
 
     - name: 5.4.4 Ensure default user umask is 027 or more restrictive  | /etc/pam.d/common-session
       lineinfile:
@@ -818,8 +819,8 @@
 # Restricting the use of su , and using sudo in its place, provides system administrators better control of the escalation of user privileges to execute privileged commands. The sudo utility also provides a better logging and audit mechanism, as it can log each command executed via sudo , whereas su can only record that a user executed the su program.
 - name: 5.6 Ensure access to the su command is restricted
   user:
-      name: "root"
-      groups: ["sudo"]
+    name: "root"
+    groups: ["sudo"]
   tags:
     - section5
     - level_1_server
