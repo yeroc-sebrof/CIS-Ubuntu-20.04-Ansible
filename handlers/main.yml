@@ -24,3 +24,9 @@
   service:
     name: sshd
     state: restarted
+
+- name: rsyslog restart
+  service:
+    name: rsyslog
+    state: restarted
+    

@@ -48,3 +48,8 @@ remoteSyslog:
   protocol: tcp
 
 logrotate_policy: "daily"
+disable_wifi: False
+IPv6_is_enabled: Yes
+enable_firewall: yes
+list_of_ports_to_allow:
+  - { rule: "allow", port: "8080", proto: "tcp" }

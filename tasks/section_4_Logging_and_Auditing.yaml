@@ -6,7 +6,7 @@
 # The capturing of system events provides system administrators with information to allow them to determine if unauthorized access to their system is occurring.
 - name: 4.1.1.1 Ensure auditd is installed
   apt:
-    name: ['auditd', 'audispd-plugins']
+    name: ["auditd", "audispd-plugins"]
     state: present
     install_recommends: false
   tags:
@@ -318,6 +318,9 @@
     owner: root
     group: root
     mode: 0600
+  notify:
+    - audit rules load
+    - auditd restart
   tags:
     - section4
     - level_2_server
@@ -407,11 +410,16 @@
         dest: /etc/rsyslog.conf
         regexp: '^\$ModLoad'
         line: "$ModLoad imtcp"
+
     - name: 4.2.1.6 Ensure remote rsyslog messages are only accepted on designated log hosts. | $InputTCPServerRun
       lineinfile:
         dest: /etc/rsyslog.conf
         regexp: '^\$InputTCPServerRun'
         line: "$InputTCPServerRun 514"
+
+      notify:
+        - rsyslog restart
+
   tags:
     - section4
     - level_1_server
@@ -425,9 +433,7 @@
     dest: /etc/systemd/journald.conf
     regexp: "(#)?ForwardToSyslog=(yes|no)"
     line: ForwardToSyslog=yes
-  changed_when: false
-  notify:
-    - restart journald
+
   tags:
     - section4
     - level_1_server
@@ -439,8 +445,7 @@
     dest: /etc/systemd/journald.conf
     regexp: "(#)?Compress=(yes|no)"
     line: Compress=yes
-  notify:
-    - journald restart
+
   tags:
     - section4
     - level_1_server
