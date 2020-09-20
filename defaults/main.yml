@@ -53,3 +53,40 @@ IPv6_is_enabled: Yes
 enable_firewall: yes
 list_of_ports_to_allow:
   - { rule: "allow", port: "8080", proto: "tcp" }
+
+
+time_synchronization_package_name: ntp
+time_synchronization_servers:
+  - uri: "time1.google.com"
+    config: "iburst"
+  - uri: "time2.google.com"
+    config: "iburst"
+  - uri: "time3.google.com"
+    config: "iburst"
+  - uri: "time4.google.com"
+    config: "iburst"
+
+web_server_name: nginx
+remove_xinetd: yes
+remove_openbsd_inetd: yes
+remove_XWindowSystem: yes
+remove_AvahiServer: yes
+remove_CUPS: yes
+remove_DHCPServer: yes
+remove_LDAPserver: yes
+remove_NFS: yes
+remove_DNSServer: yes
+remove_FTPServer: yes
+remove_HTTPserver: yes
+remove_IMAPandPOP3server: yes
+remove_Samba: yes
+remove_HTTPProxyServer: yes
+remove_SNMPServer: yes
+remove_rsyncservice: yes
+remove_NISServer: yes
+remove_NISClient: yes
+remove_rshclient: yes
+remove_talkclient: yes
+remove_telnetclient: yes
+remove_LDAPclient: yes
+remove_RPC: yes

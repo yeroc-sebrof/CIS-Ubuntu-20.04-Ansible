@@ -2,11 +2,11 @@
 # - include: section_1_Initial_Setup.yaml
 #   become: true
 
-# - include: section_2_Services.yaml
-#   become: true
-
-- include: section_3_Network_Configuration.yaml
+- include: section_2_Services.yaml
   become: true
+
+# - include: section_3_Network_Configuration.yaml
+#   become: true
 
 # - include: section_4_Logging_and_Auditing.yaml
 #   become: true
