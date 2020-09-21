@@ -107,7 +107,7 @@
         manager: "auto"
     - name: 2.2.1.4 Ensure ntp is configured | modify /etc/ntp.conf
       template:
-        src: ntp.conf.j2
+        src: files/templates/ntp.conf.j2
         dest: /etc/ntp.conf
         owner: root
         group: root
@@ -338,16 +338,25 @@
 # intended to be a mail server, it is recommended that the MTA be configured to only process
 # local mail.
 - name: 2.2.15 Ensure mail transfer agent is configured for local-only mode
-  lineinfile:
-    dest: /etc/postfix/main.cf
-    regexp: "^(#)?inet_interfaces"
-    line: "inet_interfaces = localhost"
-  ignore_errors: yes
+  block:
+    - name: 2.2.15 Ensure mail transfer agent is configured for local-only mode
+      stat:
+        path: /etc/postfix/main.cf
+      register: postfix
+
+    - name: 2.2.15 Ensure mail transfer agent is configured for local-only mode
+      lineinfile:
+        dest: /etc/postfix/main.cf
+        regexp: "^(#)?inet_interfaces"
+        line: "inet_interfaces = localhost"
+      when: postfix.stat.exists
+
   tags:
     - section2
     - level_1_server
     - level_1_workstation
     - p_2.2.15
+
 # 2.2.16 Ensure rsync service is not installed
 # The rsync service can be used to synchronize files between systems over network links.
 - name: 2.2.16 Ensure rsync service is not installed
@@ -469,7 +478,6 @@
     - level_1_server
     - level_1_workstation
     - p_2.3.6
-
 # 2.4 Ensure nonessential services are removed or masked
 - name: 2.4 Ensure nonessential services are removed or masked
   debug:

@@ -1,7 +1,6 @@
 ---
 # handlers file for Auto-CIS-Ubuntu-Linux-20.04-LTS-Remediation
 #sshd
-
 #Grub
 - name: grub restart
   command: update-grub
@@ -17,7 +16,7 @@
     state: restarted
 
 - name: audit rules load
-  command: /sbin/augenrules --load
+  shell: /sbin/augenrules --load && true || true
   when:
 
 - name: sshd restart
@@ -29,4 +28,3 @@
   service:
     name: rsyslog
     state: restarted
-    
