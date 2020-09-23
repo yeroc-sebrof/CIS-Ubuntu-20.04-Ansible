@@ -344,14 +344,14 @@
 # 6.2.5 Ensure users' home directories permissions are 750 or more restrictive
 - name: 6.2.5 Ensure users' home directories permissions are 750 or more restrictive
   block:
-    - name: 6.2.5 Ensure users' home directories permissions are 750 or more restrictive | list
+    - name: 6.2.5 Ensure users home directories permissions are 750 or more restrictive - list
       script: 6_2_5.sh
       register: output_6_2_5
-    - name: 6.2.5 Ensure users' home directories permissions are 750 or more restrictive | save
+    - name: 6.2.5 Ensure users' home directories permissions are 750 or more restrictive - save
       copy:
         dest: "{{ outputfiles }}/6.2.5"
         content: "{{ output_6_2_5.stdout_lines }}"
-    - name: 6.2.5 Ensure users' home directories permissions are 750 or more restrictive | fix
+    - name: 6.2.5 Ensure users home directories permissions are 750 or more restrictive - fix
       file:
         name: "{{ item }}"
         mode: "g-w,o-rwx"

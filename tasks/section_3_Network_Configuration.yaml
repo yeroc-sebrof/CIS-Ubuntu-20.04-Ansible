@@ -82,14 +82,12 @@
         value: "0"
         state: present
         reload: true
-      when: IPv6_is_enabled
+      # when: IPv6_is_enabled
     - name: 3.2.2 Ensure IP forwarding is disabled | IPV4 load"
-      shell: |
-        grep -Els "^\s*net\.ipv4\.ip_forward\s*=\s*1" /etc/sysctl.conf /etc/sysctl.d/*.conf /usr/lib/sysctl.d/*.conf /run/sysctl.d/*.conf | while read filename; do sed -ri "s/^\s*(net\.ipv4\.ip_forward\s*)(=)(\s*\S+\b).*$/#*REMOVED* \1/" $filename; done; sysctl -w net.ipv4.ip_forward=0; sysctl -w net.ipv4.route.flush=1
+      script: 3_2_2.sh
     - name: 3.2.2 Ensure IP forwarding is disabled | IPV6 load"
-      shell: |
-        grep -Els "^\s*net\.ipv6\.conf\.all\.forwarding\s*=\s*1" /etc/sysctl.conf /etc/sysctl.d/*.conf /usr/lib/sysctl.d/*.conf /run/sysctl.d/*.conf | while read filename; do sed -ri "s/^\s*(net\.ipv6\.conf\.all\.forwarding\s*)(=)(\s*\S+\b).*$/# *REMOVED* \1/" $filename; done; sysctl -w net.ipv6.conf.all.forwarding=0; sysctl -w net.ipv6.route.flush=1
-      when: IPv6_is_enabled
+      script: 3_2_2_2.sh
+      # when: IPv6_is_enabled
   tags:
     - section3
     - level_1_server
