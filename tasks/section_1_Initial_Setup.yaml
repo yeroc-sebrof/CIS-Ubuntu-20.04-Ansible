@@ -28,6 +28,8 @@
     - level_1_workstation
     - 1.1.1.1
     - filesystems
+    - cramfs
+    - modprobe
 
 # 1.1.1.2 Ensure mounting of freevxfs filesystems is disabled
 # The freevxfs filesystem type is a free version of the Veritas type filesystem. This is the
@@ -53,6 +55,8 @@
     - level_1_workstation
     - 1.1.1.2
     - filesystems
+    - freevxfs
+    - modprobe
 
 # 1.1.1.3 Ensure mounting of jffs2 filesystems is disabled
 # The jffs2 (journaling flash filesystem 2) filesystem type is a log-structured filesystem used
@@ -78,6 +82,8 @@
     - level_1_workstation
     - 1.1.1.3
     - filesystems
+    - jffs2
+    - modprobe
 
 # 1.1.1.4 Ensure mounting of hfs filesystems is disabled
 # The hfs filesystem type is a hierarchical filesystem that allows you to mount Mac OS
@@ -103,6 +109,8 @@
     - level_1_workstation
     - 1.1.1.4
     - filesystems
+    - modprobe
+    - hfs
 
 # 1.1.1.5 Ensure mounting of hfsplus filesystems is disabled
 # The hfsplus filesystem type is a hierarchical filesystem designed to replace hfs that allows
@@ -128,6 +136,8 @@
     - level_1_workstation
     - 1.1.1.5
     - filesystems
+    - hfsplus
+    - modprobe
 
 # 1.1.1.6 Ensure mounting of udf filesystems is disabled
 # The udf filesystem type is the universal disk format used to implement ISO/IEC 13346 and
@@ -155,6 +165,8 @@
     - level_1_workstation
     - 1.1.1.6
     - filesystems
+    - udf
+    - modprobe
 
 # 1.1.1.7 Ensure mounting of FAT filesystems is limited
 # The FAT filesystem format is primarily used on older windows systems and portable USB
@@ -184,6 +196,8 @@
     - level_2_workstation
     - 1.1.1.7
     - filesystems
+    - fat
+    - modprobe
 # # 1.1.2 Ensure /tmp is configured
 # The /tmp directory is a world-writable directory used for temporary storage by all users
 # and some applications.
@@ -228,6 +242,8 @@
     - level_1_server
     - level_1_workstation
     - 1.1.2
+    - tmp
+    - mount
 # 1.1.6 Ensure /dev/shm is configured
 # 1.1.7 Ensure nodev option set on /dev/shm partition
 # 1.1.8 Ensure nosuid option set on /dev/shm partition
@@ -253,6 +269,8 @@
     - 1.1.7
     - 1.1.8
     - 1.1.9
+    - mount
+    - shm
 
 # 1.1.10 Ensure separate partition exists for /var
 # The /var directory is used by daemons and other system services to temporarily store
@@ -273,6 +291,7 @@
     - level_1_server
     - level_1_workstation
     - 1.1.10
+    - diy
 # 1.1.11 Ensure separate partition exists for /var/tmp
 # 1.1.12 Ensure nodev option set on /var/tmp partition
 # 1.1.13 Ensure nosuid option set on /var/tmp partition
@@ -292,39 +311,44 @@
         msg: "{{ vartemp.stdout_lines }}"
   tags:
     - section1
-    - level_1_server
-    - level_1_workstation
+    - level_2_server
+    - level_2_workstation
     - 1.1.11
     - 1.1.12
     - 1.1.13
     - 1.1.14
+    - mount
+    - tmp
 # 1.1.15 Ensure separate partition exists for /var/log
 - name: 1.1.15 Ensure separate partition exists for /var/log
   debug:
     msg: For new installations, during installation create a custom partition setup and specify a separate partition
   tags:
     - section1
-    - level_1_server
-    - level_1_workstation
+    - level_2_server
+    - level_2_workstation
     - 1.1.15
+    - diy
 # 1.1.16 Ensure separate partition exists for /var/log/audit
 - name: 1.1.16 Ensure separate partition exists for /var/log/audit
   debug:
     msg: For new installations, during installation create a custom partition setup and specify a separate partition
   tags:
     - section1
-    - level_1_server
-    - level_1_workstation
+    - level_6_server
+    - level_6_workstation
     - 1.1.16
+    - diy
 # 1.1.17 Ensure separate partition exists for /home
 - name: 1.1.17 Ensure separate partition exists for /home
   debug:
     msg: For new installations, during installation create a custom partition setup and specify a separate partition
   tags:
     - section1
-    - level_1_server
-    - level_1_workstation
+    - level_2_server
+    - level_2_workstation
     - 1.1.17
+    - diy
 # 1.1.18 Ensure nodev option set on /home partition
 - name: 1.1.18 Ensure nodev option set on /home partition
   debug:
@@ -334,6 +358,7 @@
     - level_1_server
     - level_1_workstation
     - 1.1.18
+    - diy
 # 1.1.19 Ensure nodev option set on removable media partitions
 - name: 1.1.19 Ensure nodev option set on removable media partitions
   debug:
@@ -343,6 +368,7 @@
     - level_1_server
     - level_1_workstation
     - 1.1.19
+    - diy
 # 1.1.20 Ensure nosuid option set on removable media partitions
 - name: 1.1.20 Ensure nosuid option set on removable media partitions
   debug:
@@ -352,6 +378,7 @@
     - level_1_server
     - level_1_workstation
     - 1.1.20
+    - diy
 # 1.1.21 Ensure noexec option set on removable media partitions
 - name: 1.1.21 Ensure noexec option set on removable media partitions
   debug:
@@ -361,6 +388,7 @@
     - level_1_server
     - level_1_workstation
     - 1.1.21
+    - diy
 # 1.1.22 Ensure sticky bit is set on all world-writable directories
 - name: 1.1.22 Ensure sticky bit is set on all world-writable directories
   block:
@@ -402,7 +430,7 @@
   tags:
     - section1
     - level_1_server
-    - level_1_workstation
+    - level_2_workstation
     - 1.1.23
 
 # 1.1.24 Disable USB Storage
@@ -469,6 +497,7 @@
     - level_1_server
     - level_1_workstation
     - 1.2.2
+    - diy
 # 1.3 Configure sudo
 # sudo allows a permitted user to execute a command as the superuser or another user, as
 # specified by the security policy. The invoking user's real (not effective) user ID is used to
@@ -555,7 +584,6 @@
     - level_1_server
     - level_1_workstation
     - 1.4.1
-
 # 1.4.2 Ensure filesystem integrity is regularly checked
 # Periodic checking of the filesystem integrity is needed to detect changes to the filesystem.
 # Notes:
@@ -579,7 +607,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p1.4.2
+    - 1.4.2
 # 1.5 Secure Boot Settings
 # The recommendations in this section focus on securing the bootloader and settings
 # involved in the boot process directly.
@@ -608,6 +636,7 @@
     - level_1_server
     - level_1_workstation
     - 1.5.1
+    - diy
 # 1.5.2 Ensure permissions on bootloader config are configured
 # The grub configuration file contains information on boot settings and passwords for
 # unlocking boot options. The grub configuration is usually grub.cfg stored in /boot/grub/ .
@@ -625,7 +654,6 @@
     - level_1_server
     - level_1_workstation
     - 1.5.2
-
 # 1.5.3 Ensure authentication required for single user mode
 # Single user mode is used for recovery when the system detects an issue during boot or by
 # manual selection from the bootloader.
@@ -664,7 +692,6 @@
         dmesg | grep -E "NX|XD" | grep " active"
       register: xdnx
       ignore_errors: yes
-
     - name: 1.6.1 Ensure XD/NX support is enabled
       debug:
         msg: |
@@ -679,7 +706,6 @@
     - level_1_server
     - level_1_workstation
     - 1.6.1
-
 # 1.6.2 Ensure address space layout randomization (ASLR) is enabled
 # Address space layout randomization (ASLR) is an exploit mitigation technique which
 # randomly arranges the address space of key data areas of a process.
@@ -696,7 +722,6 @@
     - level_1_server
     - level_1_workstation
     - 1.6.2
-
 # 1.6.3 Ensure prelink is disabled
 - name: 1.6.3 Ensure prelink is disabled
   block:
@@ -728,7 +753,6 @@
         reload: true
         sysctl_set: true
         ignoreerrors: true
-
     - name: 1.6.4 Ensure core dumps are restricted
       lineinfile:
         dest: /etc/security/limits.conf
@@ -737,12 +761,10 @@
         state: present
         create: true
         insertbefore: "# End of file"
-
     - name: 1.6.4 Ensure core dumps are restricted
       apt:
         name: systemd-coredump
         state: present
-
     - name: 1.6.4 Ensure core dumps are restricted | reload
       shell: systemctl daemon-reload
   tags:
@@ -759,7 +781,6 @@
 # system, while this can prevent unauthorized access the configuration of MAC can be complex
 # and difficult to implement correctly preventing legitimate access from occurring.
 # # 1.7.1 Configure AppArmor
-
 # 1.7.1.1 Ensure AppArmor is installed
 # AppArmor provides Mandatory Access Controls.
 - name: 1.7.1.1 Ensure AppArmor is installed
@@ -786,7 +807,6 @@
         replace: '\1 apparmor=1 security=apparmor\2'
         follow: true
       register: output_1_7_1_2
-
     - name: 1.7.1.2 Ensure AppArmor is enabled in the bootloader configuration | reload
       shell: |
         update-grub
@@ -809,11 +829,10 @@
     done
   tags:
     - section1
-    - level_1_server
-    - level_1_workstation
+    - level_2_server
+    - level_2_workstation
     - 1.7.1.3
     - 1.7.1.4
-
 # # 1.8 Warning Banners
 # Presenting a warning message prior to the normal user login may assist in the prosecution
 # of trespassers on the computer system. Changing some of these login banners also has the
@@ -844,7 +863,6 @@
     - level_1_workstation
     - 1.8.1.1
     - 1.8.1.4
-
 # 1.8.1.2 Ensure local login warning banner is configured properly
 - name: 1.8.1.2 Ensure local login warning banner is configured properly
     1.8.1.5 Ensure permissions on /etc/issue are configured"
@@ -860,7 +878,6 @@
     - level_1_workstation
     - 1.8.1.2
     - 1.8.1.5
-
 # 1.8.1.3 Ensure remote login warning banner is configured properly
 - name: 1.8.1.3 Ensure remote login warning banner is configured properly
     1.8.1.6 Ensure permissions on /etc/issue.net are configured"

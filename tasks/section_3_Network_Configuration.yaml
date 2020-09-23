@@ -25,19 +25,16 @@
     - name: verify no wireless interfaces are active on the system
       script: 3.1.2.sh
       register: wifiStatus
-
     - name: 3.1.2 Ensure wireless interfaces are disabled
       script: 3.1.2_disable.sh
       when:
         - wifiStatus.stdout_lines ==  "Wireless is not enabled"
         - disable_wifi
-
   tags:
     - section3
     - level_1_server
     - level_2_workstation
     - 3.1.2
-
 # 3.2 Network Parameters (Host Only)
 # 3.2.1 Ensure packet redirect sending is disabled
 # An attacker could use a compromised host to send invalid ICMP redirects to other router devices in an attempt to corrupt routing and have users access a system set up by the attacker as opposed to a valid system.
@@ -53,19 +50,16 @@
       with_items:
         - { name: net.ipv4.conf.all.send_redirects, value: 0 }
         - { name: net.ipv4.conf.default.send_redirects, value: 0 }
-
     - name: 3.2.1 Ensure packet redirect sending is disabled | load
       shell: |
         sysctl -w net.ipv4.conf.all.send_redirects=0
         sysctl -w net.ipv4.conf.default.send_redirects=0
         sysctl -w net.ipv4.route.flush=1
-
   tags:
     - section3
     - level_1_server
     - level_1_workstation
     - 3.1.2
-
 # 3.2.2 Ensure IP forwarding is disabled
 # Setting the flags to 0 ensures that a system with multiple interfaces (for example, a hard proxy), will never be able to forward packets, and therefore, never serve as a router.
 - name: 3.2.2 Ensure IP forwarding is disabled"
@@ -93,7 +87,6 @@
     - level_1_server
     - level_1_workstation
     - 3.2.2
-
 # 3.3 Network Parameters (Host and Router)
 # 3.3.1 Ensure source routed packets are not accepted
 # Setting net.ipv4.conf.all.accept_source_route,
@@ -120,13 +113,11 @@
       with_items:
         - { name: net.ipv4.conf.all.accept_source_route, value: 0 }
         - { name: net.ipv4.conf.default.accept_source_route, value: 0 }
-
     - name: 3.3.1 Ensure source routed packets are not accepted | ipv4 load"
       shell: |
         sysctl -w net.ipv4.conf.all.accept_source_route=0
         sysctl -w net.ipv4.conf.default.accept_source_route=0
         sysctl -w net.ipv4.route.flush=1
-
     - name: 3.3.1 Ensure source routed packets are not accepted | ipv6"
       sysctl:
         name: "{{ item.name }}"
@@ -139,19 +130,16 @@
         - { name: net.ipv6.conf.default.accept_source_route, value: 0 }
       when:
         - IPv6_is_enabled
-
     - name: 3.3.1 Ensure source routed packets are not accepted | ipv6 load"
       shell: |
         sysctl -w net.ipv6.conf.all.accept_source_route=0
         sysctl -w net.ipv6.conf.default.accept_source_route=0
         sysctl -w net.ipv6.route.flush=1
-
   tags:
     - section3
     - level_1_server
     - level_1_workstation
     - 3.3.1
-
 # 3.3.2 Ensure ICMP redirects are not accepted
 # Attackers could use bogus ICMP redirect messages to maliciously alter the system routing
 # tables and get them to send packets to incorrect networks and allow your system packets
@@ -173,7 +161,6 @@
         sysctl -w net.ipv4.conf.all.accept_redirects=0
         sysctl -w net.ipv4.conf.default.accept_redirects=0
         sysctl -w net.ipv4.route.flush=1
-
     - name: 3.3.2 Ensure ICMP redirects are not accepted | ipv6"
       sysctl:
         name: "{{ item.name }}"
@@ -192,13 +179,11 @@
         sysctl -w net.ipv6.conf.default.accept_redirects=0
         sysctl -w net.ipv6.route.flush=1
       when: IPv6_is_enabled
-
   tags:
     - section3
     - level_1_server
     - level_1_workstation
     - 3.3.2
-
 # 3.3.3 Ensure secure ICMP redirects are not accepted
 # It is still possible for even known gateways to be compromised. Setting
 # net.ipv4.conf.all.secure_redirects to 0 protects the system from routing table
@@ -226,7 +211,6 @@
     - level_1_server
     - level_1_workstation
     - 3.3.3
-
 # 3.3.4 Ensure suspicious packets are logged
 # Enabling this feature and logging these packets allows an administrator to investigate the
 # possibility that an attacker is sending spoofed packets to their system.
@@ -247,13 +231,11 @@
         sysctl -w net.ipv4.conf.all.log_martians=1
         sysctl -w net.ipv4.conf.default.log_martians=1
         sysctl -w net.ipv4.route.flush=1
-
   tags:
     - section3
     - level_1_server
     - level_1_workstation
     - 3.3.4
-
 # 3.3.5 Ensure broadcast ICMP requests are ignored
 # Accepting ICMP echo and timestamp requests with broadcast or multicast destinations for
 # your network could be used to trick your host into starting (or participating) in a Smurf
@@ -279,7 +261,6 @@
     - level_1_server
     - level_1_workstation
     - 3.3.5
-
 # 3.3.6 Ensure bogus ICMP responses are ignored
 # Some routers (and some attackers) will send responses that violate RFC-1122 and attempt
 # to fill up a log file system with many useless error messages.
@@ -300,7 +281,6 @@
     - level_1_server
     - level_1_workstation
     - 3.3.6
-
 # 3.3.7 Ensure Reverse Path Filtering is enabled
 # Setting these flags is a good way to deter attackers from sending your system bogus
 # packets that cannot be responded to. One instance where this feature breaks down is if
@@ -329,7 +309,6 @@
     - level_1_server
     - level_1_workstation
     - 3.3.7
-
 # 3.3.8 Ensure TCP SYN Cookies is enabled
 # Attackers use SYN flood attacks to perform a denial of service attacked on a system by
 # sending many SYN packets without completing the three way handshake. This will quickly
@@ -353,7 +332,6 @@
     - level_1_server
     - level_1_workstation
     - 3.3.8
-
 # 3.3.9 Ensure IPv6 router advertisements are not accepted
 # It is recommended that systems do not accept router advertisements as they could be
 # tricked into routing traffic to compromised machines. Setting hard routes within the
@@ -381,7 +359,6 @@
     - level_1_server
     - level_1_workstation
     - 3.3.9
-
 # 3.4 Uncommon Network Protocols
 # 3.4.1 Ensure DCCP is disabled
 # If the protocol is not required, it is recommended that the drivers not be installed to reduce
@@ -397,7 +374,6 @@
     - level_2_server
     - level_2_workstation
     - 3.4.1
-
 # 3.4.2 Ensure SCTP is disabled
 # The Stream Control Transmission Protocol (SCTP) is a transport layer protocol used to
 # support message oriented communication, with several streams of messages in one
@@ -417,7 +393,6 @@
     - level_2_server
     - level_2_workstation
     - 3.4.2
-
 # 3.4.3 Ensure RDS is disabled
 # If the protocol is not being used, it is recommended that kernel module not be loaded,
 # disabling the service to reduce the potential attack surface.
@@ -435,7 +410,6 @@
     - level_2_server
     - level_2_workstation
     - 3.4.3
-
 # 3.4.4 Ensure TIPC is disabled
 # The Transparent Inter-Process Communication (TIPC) protocol is designed to provide
 # communication between cluster nodes.
@@ -450,7 +424,6 @@
     - level_2_server
     - level_2_workstation
     - 3.4.4
-
 # 3.5 Firewall Configuration
 # Only one method should be used to configure a firewall on the system. Use of more
 # than one method could produce unexpected results
@@ -485,7 +458,6 @@
     - level_1_server
     - level_1_workstation
     - 3.5.1.1
-
 # 3.5.1.2 Ensure iptables-persistent is not installed
 # The iptables-persistent is a boot-time loader for netfilter rules, iptables plugin
 # Running both ufw and the services included in the iptables-persistent package may lead to  conflict
@@ -499,7 +471,6 @@
     - level_1_server
     - level_1_workstation
     - 3.5.1.2
-
 # 3.5.1.3 Ensure ufw service is enabled
 # When running ufw enable or starting ufw via its initscript, ufw will flush its chains.
 # This is required so ufw can maintain a consistent state, but it may drop existing
@@ -512,7 +483,6 @@
         name: ufw
         state: started
         enabled: true
-
     - name: 3.5.1.3 Ensure ufw service is enabled | allow 22 before enable
       ufw:
         rule: "{{ item.rule }}"
@@ -520,14 +490,12 @@
         proto: "{{ item.proto }}"
       with_items:
         - { rule: "allow", port: "22", proto: "tcp" }
-
   when: enable_firewall
   tags:
     - section3
     - level_1_server
     - level_1_workstation
     - 3.5.1.3
-
 # 3.5.1.4 Ensure loopback traffic is configured
 # Configure the loopback interface to accept traffic. Configure all other interfaces to deny
 # traffic to the loopback network (127.0.0.0/8 for IPv4 and ::1/128 for IPv6).
@@ -542,27 +510,23 @@
         rule: allow
         direction: in
         interface: lo
-
     - name: 3.5.1.4 Ensure loopback traffic is configured  | ingress deny from lo network ipv4
       ufw:
         rule: deny
         direction: in
         from: "127.0.0.0/8"
-
     - name: 3.5.1.4 Ensure loopback traffic is configured  | ingress deny from lo network ipv6
       ufw:
         rule: deny
         direction: in
         from: "::1"
       when: IPv6_is_enabled
-
   when: enable_firewall
   tags:
     - section3
     - level_1_server
     - level_1_workstation
     - 3.5.1.4
-
 # 3.5.1.5 Ensure outbound connections are configured
 # Configure the firewall rules for new outbound connections.
 # Notes:
@@ -579,7 +543,6 @@
     - level_1_server
     - level_1_workstation
     - 3.5.1.5
-
 # 3.5.1.6 Ensure firewall rules exist for all open ports
 # Any ports that have been opened on non-loopback addresses need firewall rules to govern traffic.
 # Notes:
@@ -593,7 +556,6 @@
         rule: allow
         proto: tcp
         port: "22"
-
     - name: 3.5.1.6 Ensure firewall rules exist for all open ports | dns"
       ufw:
         rule: allow
@@ -608,14 +570,12 @@
         port: "{{ item.port }}"
         proto: "{{ item.proto }}"
       with_items: "{{ list_of_ports_to_allow }}"
-
   when: enable_firewall
   tags:
     - section3
     - level_1_server
     - level_1_workstation
     - 3.5.1.6
-
 # 3.5.1.7 Ensure default deny firewall policy
 # A default deny policy on connections ensures that any unconfigured network usage will be
 # rejected.
@@ -630,7 +590,6 @@
         ufw allow in http
         ufw allow in https
         ufw logging on
-
     - name: 3.5.1.7 Ensure default deny firewall policy
       shell: |
         ufw default deny incoming
@@ -642,7 +601,6 @@
     - level_1_server
     - level_1_workstation
     - 3.5.1.7
-
 - name: Enable UFW
   ufw:
     state: enabled
@@ -663,7 +621,6 @@
 # 3.5.2.8 Ensure default deny firewall policy
 # 3.5.2.9 Ensure nftables service is enabled
 # 3.5.2.10 Ensure nftables rules are permanent
-
 # 3.5.3 Configure iptables
 # 3.5.3.1.1 Ensure iptables packages are installed
 # 3.5.3.1.2 Ensure nftables is not installed

@@ -139,7 +139,6 @@
   tags:
     - section2
     - level_1_server
-    - level_1_workstation
     - 2.2.2
 
 # 2.2.3 Ensure Avahi Server is not installed
@@ -158,7 +157,6 @@
     - level_1_server
     - level_1_workstation
     - 2.2.3
-
 # 2.2.4 Ensure CUPS is not installed
 # The Common UNIX Print System (CUPS) provides the ability to print to both local and
 # network printers. A system running CUPS can also accept print jobs from remote systems
@@ -173,9 +171,8 @@
   tags:
     - section2
     - level_1_server
-    - level_1_workstation
+    - level_2_workstation
     - 2.2.4
-
 # 2.2.5 Ensure DHCP Server is not
 # The Dynamic Host Configuration Protocol (DHCP) is a service that allows machines to be
 # dynamically assigned IP addresses.
@@ -189,7 +186,6 @@
     - level_1_server
     - level_1_workstation
     - 2.2.5
-
 # 2.2.6 Ensure LDAP server is not installed
 # The Lightweight Directory Access Protocol (LDAP) was introduced as a replacement for
 # NIS/YP. It is a service that provides a method for looking up information from a central
@@ -204,7 +200,6 @@
     - level_1_server
     - level_1_workstation
     - 2.2.6
-
 # 2.2.7 Ensure NFS is not installed
 # The Network File System (NFS) is one of the first and most widely distributed file systems
 # in the UNIX environment. It provides the ability for systems to mount file systems of other
@@ -219,7 +214,6 @@
     - level_1_server
     - level_1_workstation
     - 2.2.7
-
 # 2.2.8 Ensure DNS Server is not installed
 # The Domain Name System (DNS) is a hierarchical naming system that maps names to IP
 # addresses for computers, services and other resources connected to a network.
@@ -233,7 +227,6 @@
     - level_1_server
     - level_1_workstation
     - 2.2.8
-
 # 2.2.9 Ensure FTP Server is not installed
 # The File Transfer Protocol (FTP) provides networked computers with the ability to transfer
 # files.
@@ -248,7 +241,6 @@
     - level_1_server
     - level_1_workstation
     - 2.2.9
-
 # 2.2.10 Ensure HTTP server is not installed
 # HTTP or web servers provide the ability to host web site content.
 # Note: Several httpd servers exist and can use other service names. apache2 and nginx are
@@ -263,7 +255,6 @@
     - level_1_server
     - level_1_workstation
     - 2.2.10
-
 # 2.2.11 Ensure IMAP and POP3 server are not installed
 # dovecot-imapd and dovecot-pop3d are an open source IMAP and POP3 server for Linux
 # based systems.
@@ -280,7 +271,6 @@
     - level_1_server
     - level_1_workstation
     - 2.2.11
-
 # 2.2.12 Ensure Samba is not installed
 # The Samba daemon allows system administrators to configure their Linux systems to share
 # file systems and directories with Windows desktops. Samba will advertise the file systems
@@ -296,7 +286,6 @@
     - level_1_server
     - level_1_workstation
     - 2.2.12
-
 # 2.2.13 Ensure HTTP Proxy Server is not installed
 # Squid is a standard proxy server used in many distributions and environments.
 # Note: Several HTTP proxy servers exist. These and other services should be checked
@@ -310,7 +299,6 @@
     - level_1_server
     - level_1_workstation
     - 2.2.13
-
 # 2.2.14 Ensure SNMP Server is not installed
 # Simple Network Management Protocol (SNMP) is a widely used protocol for monitoring the
 # health and welfare of network equipment, computer equipment and devices like UPSs.
@@ -331,7 +319,6 @@
     - level_1_server
     - level_1_workstation
     - 2.2.14
-
 # 2.2.15 Ensure mail transfer agent is configured for local-only mode
 # Mail Transfer Agents (MTA), such as sendmail and Postfix, are used to listen for incoming
 # mail and transfer the messages to the appropriate user or mail server. If the system is not
@@ -343,20 +330,17 @@
       stat:
         path: /etc/postfix/main.cf
       register: postfix
-
     - name: 2.2.15 Ensure mail transfer agent is configured for local-only mode
       lineinfile:
         dest: /etc/postfix/main.cf
         regexp: "^(#)?inet_interfaces"
         line: "inet_interfaces = localhost"
       when: postfix.stat.exists
-
   tags:
     - section2
     - level_1_server
     - level_1_workstation
     - 2.2.15
-
 # 2.2.16 Ensure rsync service is not installed
 # The rsync service can be used to synchronize files between systems over network links.
 - name: 2.2.16 Ensure rsync service is not installed
@@ -370,7 +354,6 @@
     - level_1_server
     - level_1_workstation
     - 2.2.16
-
 # 2.2.17 Ensure NIS Server is not installed
 # The Network Information Service (NIS) (formally known as Yellow Pages) is a client-server
 # directory service protocol for distributing system configuration files. The NIS server is a
@@ -385,7 +368,6 @@
     - level_1_server
     - level_1_workstation
     - 2.2.17
-
 # 2.3 Service Clients
 # 2.3.1 Ensure NIS Client is not installed
 # The NIS service is inherently an insecure system that has been vulnerable to DOS attacks,
@@ -402,7 +384,6 @@
     - level_1_server
     - level_1_workstation
     - 2.3.1
-
 # 2.3.2 Ensure rsh client is not installed
 # The rsh-client package contains the client commands for the rsh services.
 - name: 2.3.2 Ensure rsh client is not installed
@@ -415,7 +396,6 @@
     - level_1_server
     - level_1_workstation
     - 2.3.2
-
 # 2.3.3 Ensure talk client is not installed
 # The talk software makes it possible for users to send and receive messages across systems
 # through a terminal session. The talk client, which allows initialization of talk sessions, is
@@ -430,7 +410,6 @@
     - level_1_server
     - level_1_workstation
     - 2.3.3
-
 # 2.3.4 Ensure telnet client is not installed
 # The telnet package contains the telnet client, which allows users to start connections to
 # other systems via the telnet protocol.
@@ -448,7 +427,6 @@
     - level_1_server
     - level_1_workstation
     - 2.3.4
-
 # 2.3.5 Ensure LDAP client is not installed
 # The Lightweight Directory Access Protocol (LDAP) was introduced as a replacement for
 # NIS/YP. It is a service that provides a method for looking up information from a central database.
@@ -464,7 +442,6 @@
     - level_1_server
     - level_1_workstation
     - 2.3.5
-
 # 2.3.6 Ensure RPC is not installed
 # Remote Procedure Call (RPC) is a method for creating low level client server applications
 # across different system architectures. It requires an RPC compliant client listening on a
@@ -488,8 +465,8 @@
       Review the output to ensure that all services listed are required on the system. If a listed
       service is not required, remove the package containing the service. If the package
       containing a non-essential service is required, stop and mask the non-essential service.
-
   tags:
     - section2
     - level_1_server
     - level_1_workstation
+    - diy
