@@ -52,7 +52,7 @@
   block:
     - name: 2.2.1.1 Ensure time synchronization is in use - service install
       apt:
-        name: "ntp"
+        name: ["ntp"]
         state: present
         install_recommends: false
 
@@ -363,6 +363,7 @@
   apt:
     name: rsync
     state: absent
+  ignore_errors: yes
   when: remove_rsyncservice
   tags:
     - section2

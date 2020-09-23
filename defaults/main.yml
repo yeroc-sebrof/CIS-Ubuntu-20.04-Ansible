@@ -10,10 +10,17 @@ disable_hfsplus: yes
 disable_udf: yes
 disable_fat: yes
 
+temp_dir_size: 1G
 # Section 6
 withoutOwnerFileDirOwner: root
 withoutGroupFilesDirGroup: root
 outputfiles: /home/ali/
+disable_autofs: true
+disable_usb: true
+install_apparmor: true
+
+
+
 
 #Section 5
 #5.1.8 Ensure cron is restricted to authorized users
