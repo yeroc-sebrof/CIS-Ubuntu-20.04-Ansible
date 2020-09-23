@@ -211,7 +211,7 @@
       lineinfile:
         dest: /etc/systemd/system/tmp.mount
         regexp: "^Options=mode="
-        line: "Options=mode=1777,strictatime,nosuid,nodev,noexec,size={{temp_dir_size}}"
+        line: "Options=mode=1777,strictatime,nosuid,nodev,noexec,size={{ temp_dir_size }}"
 
     - name: 1.1.2 Ensure /tmp is configured | reload demon
       systemd:
@@ -289,7 +289,7 @@
       register: vartemp
     - name: /var/tmp partitions
       debug:
-        msg: "{{vartemp.stdout_lines}}"
+        msg: "{{ vartemp.stdout_lines }}"
   tags:
     - section1
     - level_1_server
@@ -673,7 +673,7 @@
           systems:
           If necessary configure your bootloader to load the new kernel and reboot the system.
           You may need to enable NX or XD support in your bios.
-          {{xdnx.stdout_lines}}
+          {{ xdnx.stdout_lines }}
       ignore_errors: yes
   tags:
     - section1

@@ -1,6 +1,5 @@
 ---
 # defaults file for Auto-CIS-Ubuntu-Linux-20.04-LTS-Remediation
-
 #Section 1
 disable_cramfs: yes
 disable_freevxfs: yes
@@ -9,7 +8,6 @@ disable_hfs: yes
 disable_hfsplus: yes
 disable_udf: yes
 disable_fat: yes
-
 temp_dir_size: 1G
 # Section 6
 withoutOwnerFileDirOwner: root
@@ -18,10 +16,6 @@ outputfiles: /home/ali/ #Output dir of some command
 disable_autofs: true
 disable_usb: true
 install_apparmor: true
-
-
-
-
 #Section 5
 #5.1.8 Ensure cron is restricted to authorized users
 allowd_hosts: "ALL: 0.0.0.0/0.0.0.0, 192.168.2.0/255.255.255.0"
@@ -42,7 +36,6 @@ list_of_os_users:
 account_inactive: 30
 # 5.4.5 Ensure default user shell timeout is 900 seconds or less
 shell_timeout_sec: 900
-
 #Section 4 Settings
 #Ensure rsyslog is configured to send logs to a remote log host
 remoteSyslog:
@@ -50,9 +43,7 @@ remoteSyslog:
   host: 192.168.2.100
   port: 514
   protocol: tcp
-
 logrotate_policy: "daily"
-
 # Section 4 | auditd config
 architecture: "x86_64"
 admin_space_left_action: halt
@@ -62,14 +53,12 @@ backlog_limit: "8192"
 space_left_action: email
 action_mail_acct: root
 grub_backlog_limit: 8192
-
 #Section 3 Setting
 disable_wifi: False
 IPv6_is_enabled: Yes
 enable_firewall: yes
 list_of_ports_to_allow:
   - { rule: "allow", port: "8080", proto: "tcp" }
-
 #Section 2 Settings
 time_synchronization_package_name: ntp
 time_synchronization_servers:
@@ -81,7 +70,6 @@ time_synchronization_servers:
     config: "iburst"
   - uri: "time4.google.com"
     config: "iburst"
-
 web_server_name: nginx
 remove_HTTPserver: no
 remove_xinetd: yes

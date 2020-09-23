@@ -60,7 +60,7 @@
   lineinfile:
     dest: /etc/audit/auditd.conf
     regexp: "^max_log_file( |=)"
-    line: "max_log_file = {{max_log_file}}"
+    line: "max_log_file = {{ max_log_file }}"
   tags:
     - section4
     - level_2_server
@@ -429,7 +429,7 @@
     path: /etc/rsyslog.conf
     backup: yes
     block: |
-      *.* action(type="omfwd" target="{{remoteSyslog.host}}" port="{{remoteSyslog.port}}" protocol="{{remoteSyslog.protocol}}" action.resumeRetryCount="100" queue.type="LinkedList" queue.size="1000")
+      *.* action(type="omfwd" target="{{ remoteSyslog.host }}" port="{{ remoteSyslog.port }}" protocol="{{ remoteSyslog.protocol }}" action.resumeRetryCount="100" queue.type="LinkedList" queue.size="1000")
   when: remoteSyslog.enable == True
   tags:
     - section4

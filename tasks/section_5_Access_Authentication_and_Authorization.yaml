@@ -110,7 +110,7 @@
     - name: 5.1.8 Ensure cron is restricted to authorized users | /etc/cron.allow
       file:
         path: /etc/cron.allow
-        state: "{{ 'file' if cfile.stat.exists else 'touch'}}"
+        state: "{{ 'file' if cfile.stat.exists else 'touch' }}"
         owner: root
         group: root
         mode: "g-wx,o-rwx"
@@ -134,7 +134,7 @@
     - name: 5.1.9 Ensure cron is restricted to authorized users | /etc/at.allow
       file:
         path: /etc/at.allow
-        state: "{{ 'file' if cfile.stat.exists else 'touch'}}"
+        state: "{{ 'file' if cfile.stat.exists else 'touch' }}"
         owner: root
         group: root
         mode: "g-wx,o-rwx"
@@ -174,7 +174,7 @@
         group: root
         mode: 0600
       with_items: "{{ private_keys.stdout_lines }}"
-      when: "{{private_keys.stdout_lines|length > 0 }}"
+      when: "{{ private_keys.stdout_lines|length > 0 }}"
   tags:
     - section5
     - level_1_server
@@ -197,7 +197,7 @@
         group: root
         mode: "go-wx"
       with_items: "{{ public_keys.stdout_lines }}"
-      when: "{{public_keys.stdout_lines|length > 0 }}"
+      when: "{{ public_keys.stdout_lines|length > 0 }}"
   tags:
     - section5
     - level_1_server
@@ -404,7 +404,7 @@
         regexp: "^AllowUsers"
         line: "AllowUsers {{ allowed_users }}"
       when:
-        - "{{allowed_users|length > 0}}"
+        - "{{ allowed_users|length > 0 }}"
 
     - name: 5.2.17 Ensure SSH access is limited | allow groups
       lineinfile:
@@ -420,7 +420,7 @@
         state: present
         dest: /etc/ssh/sshd_config
         regexp: "^DenyUsers"
-        line: "DenyUsers {{ deny_users}}"
+        line: "DenyUsers {{ deny_users }}"
       when:
         - deny_users != "None"
     - name: 5.2.17 Ensure SSH access is limited | denygroups
@@ -613,33 +613,33 @@
         state: present
         dest: /etc/login.defs
         regexp: "^PASS_MAX_DAYS"
-        line: "PASS_MAX_DAYS {{pass_expire_in_days}}"
+        line: "PASS_MAX_DAYS {{ pass_expire_in_days }}"
 
     - name: 5.4.1.1 Ensure password expiration is 365 days or less | PASS_MIN_DAYS
       lineinfile:
         state: present
         dest: /etc/login.defs
         regexp: "^PASS_MIN_DAYS"
-        line: "PASS_MIN_DAYS {{pass_min_days}}"
+        line: "PASS_MIN_DAYS {{ pass_min_days }}"
 
     - name: 5.4.1.1 Ensure password expiration is 365 days or less | PASS_WARN_AGE
       lineinfile:
         state: present
         dest: /etc/login.defs
         regexp: "^PASS_WARN_AGE"
-        line: "PASS_WARN_AGE {{pass_warn_age}}"
+        line: "PASS_WARN_AGE {{ pass_warn_age }}"
 
     - name: 5.4.1.1 Ensure password expiration is 365 days or less | chage
-      command: "chage --maxdays {{pass_expire_in_days}} {{item}}"
-      with_items: "{{list_of_os_users}}"
+      command: "chage --maxdays {{ pass_expire_in_days }} {{ item }}"
+      with_items: "{{ list_of_os_users }}"
 
     - name: 5.4.1.1 Ensure password expiration is 365 days or less | chage --mindays
-      command: "chage --mindays {{pass_min_days}} {{item}}"
-      with_items: "{{list_of_os_users}}"
+      command: "chage --mindays {{ pass_min_days }} {{ item }}"
+      with_items: "{{ list_of_os_users }}"
 
     - name: 5.4.1.1 Ensure password expiration is 365 days or less | chage --warndays
-      command: "chage --warndays {{pass_warn_age}} {{item}}"
-      with_items: "{{list_of_os_users}}"
+      command: "chage --warndays {{ pass_warn_age }} {{ item }}"
+      with_items: "{{ list_of_os_users }}"
   tags:
     - section5
     - level_1_server
@@ -652,11 +652,11 @@
 - name: 5.4.1.4 Ensure inactive password lock is 30 days or less
   block:
     - name: 5.4.1.4 Ensure inactive password lock is 30g1 days or less | useradd
-      command: "useradd -D -f {{account_inactive}}"
+      command: "useradd -D -f {{ account_inactive }}"
 
     - name: 5.4.1.4 Ensure inactive password lock is 30 days or less | useradd
-      command: "chage --inactive {{account_inactive}} {{item}}"
-      with_items: "{{list_of_os_users}}"
+      command: "chage --inactive {{ account_inactive }} {{ item }}"
+      with_items: "{{ list_of_os_users }}"
   tags:
     - section5
     - level_1_server
@@ -679,8 +679,8 @@
 
     - name: 5.4.1.5 Ensure all users last password change date is in the past | save list
       copy:
-        dest: "{{outputfiles}}/5.4.1.5"
-        content: "{{output_5_4_1_5.stdout_lines}}"
+        dest: "{{ outputfiles }}/5.4.1.5"
+        content: "{{ output_5_4_1_5.stdout_lines }}"
   tags:
     - section5
     - level_1_server
@@ -774,7 +774,7 @@
         dest: /etc/bash.bashrc
         create: true
         regexp: "^TMOUT="
-        line: "TMOUT={{shell_timeout_sec}}  ;export TMOUT"
+        line: "TMOUT={{ shell_timeout_sec }}  ;export TMOUT"
 
     - name: 5.4.5 Ensure default user shell timeout is 900 seconds or less - /etc/profile
       lineinfile:
@@ -782,7 +782,7 @@
         dest: /etc/profile
         create: true
         regexp: "^TMOUT="
-        line: "TMOUT={{shell_timeout_sec}}  ;export TMOUT"
+        line: "TMOUT={{ shell_timeout_sec }}  ;export TMOUT"
 
     - name: 5.4.5 Ensure default user shell timeout is 900 seconds or less - /etc/profile.d/timeout.sh
       lineinfile:
@@ -790,7 +790,7 @@
         dest: /etc/profile.d/tmout.sh
         create: true
         regexp: "^TMOUT="
-        line: "TMOUT={{shell_timeout_sec}}  ;export TMOUT"
+        line: "TMOUT={{ shell_timeout_sec }}  ;export TMOUT"
   tags:
     - section5
     - level_1_server
@@ -807,8 +807,8 @@
       register: securetty
     - name: 5.5 Ensure root login is restricted to system console | save output
       copy:
-        dest: "{{outputfiles}}/5.5"
-        content: "{{securetty}}"
+        dest: "{{ outputfiles }}/5.5"
+        content: "{{ securetty }}"
   tags:
     - section5
     - level_1_server

@@ -609,7 +609,7 @@
         rule: "{{ item.rule }}"
         port: "{{ item.port }}"
         proto: "{{ item.proto }}"
-      with_items: "{{list_of_ports_to_allow}}"
+      with_items: "{{ list_of_ports_to_allow }}"
 
   when: enable_firewall
   tags:

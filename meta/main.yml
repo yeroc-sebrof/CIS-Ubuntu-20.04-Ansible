@@ -13,12 +13,12 @@ galaxy_info:
   galaxy_tags:
     [
       ansible,
-      CIS,
-      Ubuntu,
-      Hardening,
-      Security,
-      Linux,
-      Secure,
+      cis,
+      ubuntu,
+      hardening,
+      security,
+      linux,
+      secure,
       cisecurity,
       automation,
     ]

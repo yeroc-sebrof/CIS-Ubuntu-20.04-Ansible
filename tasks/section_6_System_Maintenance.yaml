@@ -10,8 +10,8 @@
       register: output_6_1_1
     - name: "6.1.1 Audit system file permissions | save output to file"
       copy:
-        dest: "{{outputfiles}}/6.1.1"
-        content: "{{output_6_1_1.stdout_lines}}"
+        dest: "{{ outputfiles }}/6.1.1"
+        content: "{{ output_6_1_1.stdout_lines }}"
 
   tags:
     - section6
@@ -139,13 +139,13 @@
       register: output_6_1_10
     - name: "6.1.10 Ensure no world writable files exist | save output"
       copy:
-        dest: "{{outputfiles}}/6.1.10"
-        content: "{{output_6_1_10.stdout_lines}}"
+        dest: "{{ outputfiles }}/6.1.10"
+        content: "{{ output_6_1_10.stdout_lines }}"
     - name: "6.1.10 Ensure no world writable files exist | fix permission"
       file:
-        path: "{{item}}"
+        path: "{{ item }}"
         mode: "o-w"
-      with_items: "{{output_6_1_10.stdout_lines}}"
+      with_items: "{{ output_6_1_10.stdout_lines }}"
 
   tags:
     - section6
@@ -162,14 +162,14 @@
       register: output_6_1_11
     - name: "6.1.11 Ensure no unowned files or directories exist | Save output"
       copy:
-        dest: "{{outputfiles}}/6.1.11"
-        content: "{{output_6_1_11.stdout_lines}}"
+        dest: "{{ outputfiles }}/6.1.11"
+        content: "{{ output_6_1_11.stdout_lines }}"
     - name: "6.1.11 Ensure no unowned files or directories exist | Fix "
       file:
-        path: "{{item}}"
-        owner: "{{withoutOwnerFileDirOwner}}"
-        group: "{{withoutGroupFilesDirGroup}}"
-      with_items: "{{output_6_1_11.stdout_lines}}"
+        path: "{{ item }}"
+        owner: "{{ withoutOwnerFileDirOwner }}"
+        group: "{{ withoutGroupFilesDirGroup }}"
+      with_items: "{{ output_6_1_11.stdout_lines }}"
 
   tags:
     - section6
@@ -185,14 +185,14 @@
       register: output_6_1_12
     - name: "6.1.12 Ensure no ungrouped files or directories exist | Save output"
       copy:
-        dest: "{{outputfiles}}/6.1.12"
-        content: "{{output_6_1_12.stdout_lines}}"
+        dest: "{{ outputfiles }}/6.1.12"
+        content: "{{ output_6_1_12.stdout_lines }}"
     - name: "6.1.12 Ensure no ungrouped files or directories exist | Fix "
       file:
-        path: "{{item}}"
-        owner: "{{withoutOwnerFileDirOwner}}"
-        group: "{{withoutGroupFilesDirGroup}}"
-      with_items: "{{output_6_1_12.stdout_lines}}"
+        path: "{{ item }}"
+        owner: "{{ withoutOwnerFileDirOwner }}"
+        group: "{{ withoutGroupFilesDirGroup }}"
+      with_items: "{{ output_6_1_12.stdout_lines }}"
 
   tags:
     - section6
@@ -208,13 +208,13 @@
       register: output_6_1_13
     - name: "6.1.13 Audit SUID executables | save output"
       copy:
-        dest: "{{outputfiles}}/6.1.13"
-        content: "{{output_6_1_13.stdout_lines}}"
+        dest: "{{ outputfiles }}/6.1.13"
+        content: "{{ output_6_1_13.stdout_lines }}"
     # - name: "6.1.13 Audit SUID executables | fix"
     #   file:
-    #     path: "{{item}}"
+    #     path: "{{ item }}"
     #     mode: "-s"
-    #   with_items: "{{output_6_1_13.stdout_lines}}"
+    #   with_items: "{{ output_6_1_13.stdout_lines }}"
 
   tags:
     - section6
@@ -230,13 +230,13 @@
       register: output_6_1_14
     - name: "6.1.14 Audit SGID executables | save output"
       copy:
-        dest: "{{outputfiles}}/6.1.14"
-        content: "{{output_6_1_14.stdout_lines}}"
+        dest: "{{ outputfiles }}/6.1.14"
+        content: "{{ output_6_1_14.stdout_lines }}"
     # - name: "6.1.14 Audit SGID executables | fix"
     #   file:
-    #     path: "{{item}}"
+    #     path: "{{ item }}"
     #     mode: "-s"
-    #   with_items: "{{output_6_1_14.stdout_lines}}"
+    #   with_items: "{{ output_6_1_14.stdout_lines }}"
 
   tags:
     - section6
@@ -254,15 +254,15 @@
       register: output_6_2_1
     - name: "6.2.1 Ensure password fields are not empty | Save output"
       copy:
-        dest: "{{outputfiles}}/6.2.1"
-        content: "{{output_6_2_1.stdout_lines}}"
+        dest: "{{ outputfiles }}/6.2.1"
+        content: "{{ output_6_2_1.stdout_lines }}"
     - name: "6.2.1 Ensure password fields are not empty | Lock account"
       user:
-        name: "{{item}}"
+        name: "{{ item }}"
         password_lock: yes
-      with_items: "{{output_6_2_1.stdout_lines}}"
+      with_items: "{{ output_6_2_1.stdout_lines }}"
       when:
-        - "{{output_6_2_1.stdout_lines}}"
+        - "{{ output_6_2_1.stdout_lines }}"
 
   tags:
     - section6
@@ -279,14 +279,14 @@
       register: output_6_2_2
     - name: "6.2.2 Ensure root is the only UID 0 account | Save output"
       copy:
-        dest: "{{outputfiles}}/6.2.2"
-        content: "{{output_6_2_2.stdout_lines}}"
+        dest: "{{ outputfiles }}/6.2.2"
+        content: "{{ output_6_2_2.stdout_lines }}"
     # - name: "6.2.2 Ensure root is the only UID 0 account | Lock account"
     #   user:
-    #     name: "{{item}}"
+    #     name: "{{ item }}"
     #     uid: 1992
     #     force: yes
-    #   with_items: "{{output_6_2_2.stdout_lines}}"
+    #   with_items: "{{ output_6_2_2.stdout_lines }}"
 
   tags:
     - section6
@@ -302,8 +302,8 @@
       register: output_6_2_3
     - name: "6.2.3 Ensure root PATH Integrity | save output"
       copy:
-        dest: "{{outputfiles}}/6.2.3"
-        content: "{{output_6_2_3}}"
+        dest: "{{ outputfiles }}/6.2.3"
+        content: "{{ output_6_2_3 }}"
 
   tags:
     - section6
@@ -326,14 +326,14 @@
       register: output_6_2_4
     - name: "6.2.4 Ensure all users' home directories exist | save"
       copy:
-        dest: "{{outputfiles}}/6.2.4"
-        content: "{{output_6_2_4.stdout_lines}}"
+        dest: "{{ outputfiles }}/6.2.4"
+        content: "{{ output_6_2_4.stdout_lines }}"
     - name: "6.2.4 Ensure all users' home directories exist | fix "
       user:
-        name: "{{item}}"
+        name: "{{ item }}"
         create_home: yes
-      with_items: "{{output_6_2_4.stdout_lines}}"
-      when: "{{output_6_2_4.stdout_lines|length > 0 }}"
+      with_items: "{{ output_6_2_4.stdout_lines }}"
+      when: "{{ output_6_2_4.stdout_lines|length > 0 }}"
 
   tags:
     - section6
@@ -370,14 +370,14 @@
       register: output_6_2_5
     - name: "6.2.5 Ensure users' home directories permissions are 750 or more restrictive | save "
       copy:
-        dest: "{{outputfiles}}/6.2.5"
-        content: "{{output_6_2_5.stdout_lines}}"
+        dest: "{{ outputfiles }}/6.2.5"
+        content: "{{ output_6_2_5.stdout_lines }}"
     - name: "6.2.5 Ensure users' home directories permissions are 750 or more restrictive | fix "
       file:
-        name: "{{item}}"
+        name: "{{ item }}"
         mode: "g-w,o-rwx"
-      with_items: "{{output_6_2_5.stdout_lines}}"
-      when: "{{output_6_2_5.stdout_lines|length > 0}}"
+      with_items: "{{ output_6_2_5.stdout_lines }}"
+      when: "{{ output_6_2_5.stdout_lines|length > 0 }}"
 
   tags:
     - section6
@@ -408,15 +408,15 @@
 
     - name: "6.2.6 Ensure users own their home directories | save output"
       copy:
-        dest: "{{outputfiles}}/6.2.6"
-        content: "{{output_6_2_6_list}}"
+        dest: "{{ outputfiles }}/6.2.6"
+        content: "{{ output_6_2_6_list }}"
     - name: "6.2.6 Ensure users own their home directories | fix "
       file:
-        path: "{{item.split(',')[0] }}"
-        group: "{{item.split(',')[1] }}"
-        owner: "{{item.split(',')[1] }}"
+        path: "{{ item.split(',')[0] }}"
+        group: "{{ item.split(',')[1] }}"
+        owner: "{{ item.split(',')[1] }}"
         recurse: yes
-      with_items: "{{output_6_2_6_list}}"
+      with_items: "{{ output_6_2_6_list }}"
 
   tags:
     - section6
@@ -449,8 +449,8 @@
       register: output_6_2_7
     - name: "6.2.7 Ensure users' dot files are not group or world writable | save output"
       copy:
-        dest: "{{outputfiles}}/6.2.7"
-        content: "{{output_6_2_7.stdout_lines}}"
+        dest: "{{ outputfiles }}/6.2.7"
+        content: "{{ output_6_2_7.stdout_lines }}"
 
   tags:
     - section6
@@ -475,8 +475,8 @@
       register: output_6_2_8
     - name: "6.2.8 Ensure no users have .forward files  | save output"
       copy:
-        dest: "{{outputfiles}}/6.2.8"
-        content: "{{output_6_2_8.stdout}}"
+        dest: "{{ outputfiles }}/6.2.8"
+        content: "{{ output_6_2_8.stdout }}"
 
   tags:
     - section6
@@ -501,8 +501,8 @@
       register: output_6_2_9
     - name: "6.2.9 Ensure no users have .netrc files | save output"
       copy:
-        dest: "{{outputfiles}}/6.2.9"
-        content: "{{output_6_2_9.stdout}}"
+        dest: "{{ outputfiles }}/6.2.9"
+        content: "{{ output_6_2_9.stdout }}"
 
   tags:
     - section6
@@ -547,8 +547,8 @@
       register: output_6_2_10
     - name: "6.2.10 Ensure users' .netrc Files are not group or world accessible | save output"
       copy:
-        dest: "{{outputfiles}}/6.2.10"
-        content: "{{output_6_2_10.stdout}}"
+        dest: "{{ outputfiles }}/6.2.10"
+        content: "{{ output_6_2_10.stdout }}"
 
   tags:
     - section6
@@ -575,8 +575,8 @@
       register: output_6_2_11
     - name: "6.2.11 Ensure no users have .rhosts files | save output"
       copy:
-        dest: "{{outputfiles}}/6.2.11"
-        content: "{{output_6_2_11.stdout}}"
+        dest: "{{ outputfiles }}/6.2.11"
+        content: "{{ output_6_2_11.stdout }}"
   tags:
     - section6
     - level_1_server
@@ -597,8 +597,8 @@
       register: output_6_2_12
     - name: "6.2.12 Ensure all groups in /etc/passwd exist in /etc/group | save output"
       copy:
-        dest: "{{outputfiles}}/6.2.12"
-        content: "{{output_6_2_12}}"
+        dest: "{{ outputfiles }}/6.2.12"
+        content: "{{ output_6_2_12 }}"
 
   tags:
     - section6
@@ -622,8 +622,8 @@
       register: output_6_2_13
     - name: "6.2.13 Ensure no duplicate UIDs exist | save output"
       copy:
-        dest: "{{outputfiles}}/6.2.13"
-        content: "{{output_6_2_13}}"
+        dest: "{{ outputfiles }}/6.2.13"
+        content: "{{ output_6_2_13 }}"
 
   tags:
     - section6
@@ -642,8 +642,8 @@
       register: output_6_2_14
     - name: "6.2.14 Ensure no duplicate GIDs exist | save output"
       copy:
-        dest: "{{outputfiles}}/6.2.14"
-        content: "{{output_6_2_14}}"
+        dest: "{{ outputfiles }}/6.2.14"
+        content: "{{ output_6_2_14 }}"
 
   tags:
     - section6
@@ -662,8 +662,8 @@
       register: output_6_2_15
     - name: "6.2.15 Ensure no duplicate user names exist | save output"
       copy:
-        dest: "{{outputfiles}}/6.2.15"
-        content: "{{output_6_2_15.stdout_lines}}"
+        dest: "{{ outputfiles }}/6.2.15"
+        content: "{{ output_6_2_15.stdout_lines }}"
 
   tags:
     - section6
@@ -682,8 +682,8 @@
       register: output_6_2_16
     - name: "6.2.16 Ensure no duplicate group names exist | save output"
       copy:
-        dest: "{{outputfiles}}/2.6.16"
-        content: "{{output_6_2_16}}"
+        dest: "{{ outputfiles }}/2.6.16"
+        content: "{{ output_6_2_16 }}"
 
   tags:
     - section6
@@ -701,8 +701,8 @@
       register: output_6_2_17
     - name: "6.2.17 Ensure shadow group is empty | save output"
       copy:
-        dest: "{{outputfiles}}/6.2.17"
-        content: "{{output_6_2_17}}"
+        dest: "{{ outputfiles }}/6.2.17"
+        content: "{{ output_6_2_17 }}"
 
   tags:
     - section6
