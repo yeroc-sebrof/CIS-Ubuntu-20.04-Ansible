@@ -26,7 +26,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.1.1.1
+    - 1.1.1.1
     - filesystems
 
 # 1.1.1.2 Ensure mounting of freevxfs filesystems is disabled
@@ -51,7 +51,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.1.1.2
+    - 1.1.1.2
     - filesystems
 
 # 1.1.1.3 Ensure mounting of jffs2 filesystems is disabled
@@ -76,7 +76,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.1.1.3
+    - 1.1.1.3
     - filesystems
 
 # 1.1.1.4 Ensure mounting of hfs filesystems is disabled
@@ -101,7 +101,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.1.1.4
+    - 1.1.1.4
     - filesystems
 
 # 1.1.1.5 Ensure mounting of hfsplus filesystems is disabled
@@ -126,7 +126,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.1.1.5
+    - 1.1.1.5
     - filesystems
 
 # 1.1.1.6 Ensure mounting of udf filesystems is disabled
@@ -153,7 +153,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.1.1.6
+    - 1.1.1.6
     - filesystems
 
 # 1.1.1.7 Ensure mounting of FAT filesystems is limited
@@ -182,7 +182,7 @@
     - section1
     - level_2_server
     - level_2_workstation
-    - p_1.1.1.7
+    - 1.1.1.7
     - filesystems
 # # 1.1.2 Ensure /tmp is configured
 # The /tmp directory is a world-writable directory used for temporary storage by all users
@@ -227,7 +227,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.1.2
+    - 1.1.2
 # 1.1.6 Ensure /dev/shm is configured
 # 1.1.7 Ensure nodev option set on /dev/shm partition
 # 1.1.8 Ensure nosuid option set on /dev/shm partition
@@ -249,10 +249,10 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.1.6
-    - p_1.1.7
-    - p_1.1.8
-    - p_1.1.9
+    - 1.1.6
+    - 1.1.7
+    - 1.1.8
+    - 1.1.9
 
 # 1.1.10 Ensure separate partition exists for /var
 # The /var directory is used by daemons and other system services to temporarily store
@@ -272,7 +272,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.1.10
+    - 1.1.10
 # 1.1.11 Ensure separate partition exists for /var/tmp
 # 1.1.12 Ensure nodev option set on /var/tmp partition
 # 1.1.13 Ensure nosuid option set on /var/tmp partition
@@ -294,38 +294,73 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.1.11
-    - p_1.1.12
-    - p_1.1.13
-    - p_1.1.14
+    - 1.1.11
+    - 1.1.12
+    - 1.1.13
+    - 1.1.14
 # 1.1.15 Ensure separate partition exists for /var/log
 - name: 1.1.15 Ensure separate partition exists for /var/log
   debug:
     msg: For new installations, during installation create a custom partition setup and specify a separate partition
+  tags:
+    - section1
+    - level_1_server
+    - level_1_workstation
+    - 1.1.15
 # 1.1.16 Ensure separate partition exists for /var/log/audit
 - name: 1.1.16 Ensure separate partition exists for /var/log/audit
   debug:
     msg: For new installations, during installation create a custom partition setup and specify a separate partition
+  tags:
+    - section1
+    - level_1_server
+    - level_1_workstation
+    - 1.1.16
 # 1.1.17 Ensure separate partition exists for /home
 - name: 1.1.17 Ensure separate partition exists for /home
   debug:
     msg: For new installations, during installation create a custom partition setup and specify a separate partition
+  tags:
+    - section1
+    - level_1_server
+    - level_1_workstation
+    - 1.1.17
 # 1.1.18 Ensure nodev option set on /home partition
 - name: 1.1.18 Ensure nodev option set on /home partition
   debug:
     msg: For new installations, during installation create a custom partition setup and specify a separate partition
+  tags:
+    - section1
+    - level_1_server
+    - level_1_workstation
+    - 1.1.18
 # 1.1.19 Ensure nodev option set on removable media partitions
 - name: 1.1.19 Ensure nodev option set on removable media partitions
   debug:
     msg: For new installations, during installation create a custom partition setup and specify a separate partition
+  tags:
+    - section1
+    - level_1_server
+    - level_1_workstation
+    - 1.1.19
 # 1.1.20 Ensure nosuid option set on removable media partitions
 - name: 1.1.20 Ensure nosuid option set on removable media partitions
   debug:
     msg: For new installations, during installation create a custom partition setup and specify a separate partition
+  tags:
+    - section1
+    - level_1_server
+    - level_1_workstation
+    - 1.1.20
 # 1.1.21 Ensure noexec option set on removable media partitions
 - name: 1.1.21 Ensure noexec option set on removable media partitions
   debug:
     msg: For new installations, during installation create a custom partition setup and specify a separate partition
+  tags:
+    - section1
+    - level_1_server
+    - level_1_workstation
+    - 1.1.21
 # 1.1.22 Ensure sticky bit is set on all world-writable directories
 - name: 1.1.22 Ensure sticky bit is set on all world-writable directories
   block:
@@ -343,7 +378,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.1.22
+    - 1.1.22
 
 # 1.1.23 Disable Automounting
 # autofs allows automatic mounting of devices, typically including CD/DVDs and USB drives.
@@ -369,7 +404,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.1.23
+    - 1.1.23
 
 # 1.1.24 Disable USB Storage
 # USB storage provides a means to transfer and store files insuring persistence and
@@ -397,7 +432,7 @@
     - section1
     - level_1_server
     - level_2_workstation
-    - p_1.1.24
+    - 1.1.24
 
 # # 1.2 Configure Software Updates
 # For the purpose of this benchmark, the requirement is to ensure that a patch management
@@ -417,7 +452,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.2.1
+    - 1.2.1
 # 1.2.2 Ensure GPG keys are configured
 # Most packages managers implement GPG key signing to verify package integrity during installation.
 # It is important to ensure that updates are obtained from a valid source to protect against
@@ -434,7 +469,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.2.2
+    - 1.2.2
 # 1.3 Configure sudo
 # sudo allows a permitted user to execute a command as the superuser or another user, as
 # specified by the security policy. The invoking user's real (not effective) user ID is used to
@@ -453,7 +488,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.3.1
+    - 1.3.1
 # 1.3.2 Ensure sudo commands use pty
 # sudo can be configured to run only from a pseudo-pty
 # Note: visudo edits the sudoers file in a safe fashion, analogous to vipw(8). visudo locks the
@@ -471,7 +506,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.3.2
+    - 1.3.2
 # 1.3.3 Ensure sudo log file exists
 # sudo can use a custom log file.
 # Note: visudo edits the sudoers file in a safe fashion, analogous to vipw(8). visudo locks the
@@ -489,7 +524,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.3.3
+    - 1.3.3
 # 1.4 Filesystem Integrity Checking
 # AIDE is a file integrity checking tool, similar in nature to Tripwire. While it cannot prevent
 # intrusions, it can detect unauthorized changes to configuration files by alerting when the
@@ -520,7 +555,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.4.1
+    - 1.4.1
 
 # 1.4.2 Ensure filesystem integrity is regularly checked
 # Periodic checking of the filesystem integrity is needed to detect changes to the filesystem.
@@ -545,7 +580,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.4.2
+    - p1.4.2
 # 1.5 Secure Boot Settings
 # The recommendations in this section focus on securing the bootloader and settings
 # involved in the boot process directly.
@@ -569,6 +604,11 @@
       password_pbkdf2 <username> <encrypted-password>
       EOF
       More info: https://help.ubuntu.com/community/Grub2/Passwords
+  tags:
+    - section1
+    - level_1_server
+    - level_1_workstation
+    - 1.5.1
 # 1.5.2 Ensure permissions on bootloader config are configured
 # The grub configuration file contains information on boot settings and passwords for
 # unlocking boot options. The grub configuration is usually grub.cfg stored in /boot/grub/ .
@@ -585,7 +625,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.5.2
+    - 1.5.2
 
 # 1.5.3 Ensure authentication required for single user mode
 # Single user mode is used for recovery when the system detects an issue during boot or by
@@ -604,7 +644,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.5.3
+    - 1.5.3
     - diy
 # 1.6 Additional Process Hardening
 # 1.6.1 Ensure XD/NX support is enabled
@@ -639,7 +679,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.6.1
+    - 1.6.1
 
 # 1.6.2 Ensure address space layout randomization (ASLR) is enabled
 # Address space layout randomization (ASLR) is an exploit mitigation technique which
@@ -656,7 +696,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.6.2
+    - 1.6.2
 
 # 1.6.3 Ensure prelink is disabled
 - name: 1.6.3 Ensure prelink is disabled
@@ -672,7 +712,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.6.3
+    - 1.6.3
 
 # 1.6.4 Ensure core dumps are restricted
 # A core dump is the memory of an executable program. It is generally used to determine
@@ -710,7 +750,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.6.4
+    - 1.6.4
 # # 1.7 Mandatory Access Control
 # Mandatory Access Control (MAC) provides an additional layer of access restrictions to
 # processes on top of the base Discretionary Access Controls. By restricting how processes
@@ -732,7 +772,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.7.1.1
+    - 1.7.1.1
 # 1.7.1.2 Ensure AppArmor is enabled in the bootloader configuration
 # Configure AppArmor to be enabled at boot time and verify that it has not been overwritten
 # by the bootloader boot parameters.
@@ -756,7 +796,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.7.1.2
+    - 1.7.1.2
 # 1.7.1.3 Ensure all AppArmor Profiles are in enforce or complain mode
 # AppArmor profiles define what resources applications are able to access.
 - name: "1.7.1.3 Ensure all AppArmor Profiles are in enforce or complain mode\n
@@ -772,8 +812,8 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.7.1.3
-    - p_1.7.1.4
+    - 1.7.1.3
+    - 1.7.1.4
 
 # # 1.8 Warning Banners
 # Presenting a warning message prior to the normal user login may assist in the prosecution
@@ -803,8 +843,8 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.8.1.1
-    - p_1.8.1.4
+    - 1.8.1.1
+    - 1.8.1.4
 
 # 1.8.1.2 Ensure local login warning banner is configured properly
 - name: "1.8.1.2 Ensure local login warning banner is configured properly\n
@@ -819,8 +859,8 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.8.1.2
-    - p_1.8.1.5
+    - 1.8.1.2
+    - 1.8.1.5
 
 # 1.8.1.3 Ensure remote login warning banner is configured properly
 - name: "1.8.1.3 Ensure remote login warning banner is configured properly\n
@@ -835,8 +875,8 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.8.1.3
-    - p_1.8.1.6
+    - 1.8.1.3
+    - 1.8.1.6
 # 1.9 Ensure updates, patches, and additional security software are installed
 - name: 1.9 Ensure updates, patches, and additional security software are installed
   apt:
@@ -846,7 +886,7 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.9
+    - 1.9
 # 1.10 Ensure GDM is removed or login is configured
 - name: 1.10 Ensure GDM is removed or login is configured
   template:
@@ -857,4 +897,4 @@
     - section1
     - level_1_server
     - level_1_workstation
-    - p_1.10
+    - 1.10

@@ -13,7 +13,7 @@
     - section4
     - level_2_server
     - level_2_workstation
-    - p_4.1.1.1
+    - 4.1.1.1
 
 # 4.1.1.2 Ensure auditd service is enabled
 # The capturing of system events provides system administrators with information to allow them to determine if unauthorized access to their system is occurring.
@@ -26,7 +26,7 @@
     - section4
     - level_2_server
     - level_2_workstation
-    - p_4.1.1.2
+    - 4.1.1.2
 
 # 4.1.1.3 Ensure auditing for processes that start prior to auditd is enabled
 - name: 4.1.1.3 Ensure auditing for processes that start prior to auditd is enabled
@@ -39,7 +39,7 @@
     - section4
     - level_2_server
     - level_2_workstation
-    - p_4.1.1.3
+    - 4.1.1.3
 
 # 4.1.1.4 Ensure audit_backlog_limit is sufficient
 # during boot if audit=1, then the backlog will hold 64 records. If more that 64 records are created during boot, auditd records will be lost and potential malicious activity could go undetected.
@@ -52,7 +52,7 @@
     - section4
     - level_2_server
     - level_2_workstation
-    - p_4.1.1.4
+    - 4.1.1.4
 
 # 4.1.2 Configure Data Retention
 # 4.1.2.1 Ensure audit log storage size is configured
@@ -65,7 +65,7 @@
     - section4
     - level_2_server
     - level_2_workstation
-    - p_4.1.2.1
+    - 4.1.2.1
 
 # 4.1.2.2 Ensure audit logs are not automatically deleted
 - name: 4.1.2.2 Ensure audit logs are not automatically deleted
@@ -77,7 +77,7 @@
     - section4
     - level_2_server
     - level_2_workstation
-    - p_4.1.2.2
+    - 4.1.2.2
 
 # 4.1.2.3 Ensure system is disabled when audit logs are full
 - name: 4.1.2.3 Ensure system is disabled when audit logs are full
@@ -101,7 +101,7 @@
     - section4
     - level_2_server
     - level_2_workstation
-    - p_4.1.2.3
+    - 4.1.2.3
 
 # 4.1.3 Ensure events that modify date and time information are collected
 # Unexpected changes in system date and/or time could be a sign of malicious activity on the system.
@@ -116,7 +116,7 @@
     - section4
     - level_2_server
     - level_2_workstation
-    - p_4.1.3
+    - 4.1.3
 
 # 4.1.4 Ensure events that modify user/group information are collected
 # # Unexpected changes to these files could be an indication that the system has been compromised and that an unauthorized user is attempting to hide their activities or compromise additional accounts.
@@ -131,7 +131,7 @@
     - section4
     - level_2_server
     - level_2_workstation
-    - p_4.1.4
+    - 4.1.4
 
 # 4.1.5 Ensure events that modify the system's network environment are collected
 # Monitoring sethostname and setdomainname will identify potential unauthorized changes to host and domainname of a system. The changing of these names could potentially break
@@ -150,7 +150,7 @@
     - section4
     - level_2_server
     - level_2_workstation
-    - p_4.1.5
+    - 4.1.5
 
 # 4.1.6 Ensure events that modify the system's Mandatory Access Controls are collected
 # # Changes to files in these directories could indicate that an unauthorized user is attempting to modify access controls and change security contexts, leading to a compromise of the system.
@@ -165,7 +165,7 @@
     - section4
     - level_2_server
     - level_2_workstation
-    - p_4.1.6
+    - 4.1.6
 
 # 4.1.7 Ensure login and logout events are collected
 # Monitoring login/logout events could provide a system administrator with information associated with brute force attacks against user logins.
@@ -180,7 +180,7 @@
     - section4
     - level_2_server
     - level_2_workstation
-    - p_4.1.7
+    - 4.1.7
 
 # 4.1.8 Ensure session initiation information is collected
 # # Monitoring these files for changes could alert a system administrator to logins occurring at unusual hours, which could indicate intruder activity (i.e. a user logging in at a time when they do not normally log in).
@@ -195,7 +195,7 @@
     - section4
     - level_2_server
     - level_2_workstation
-    - p_4.1.8
+    - 4.1.8
 
 # 4.1.9 Ensure discretionary access control permission modification events are collected
 # Monitoring for changes in file attributes could alert a system administrator to activity that could indicate intruder activity or policy violation.
@@ -210,7 +210,7 @@
     - section4
     - level_2_server
     - level_2_workstation
-    - p_4.1.9
+    - 4.1.9
 
 # 4.1.10 Ensure unsuccessful unauthorized file access attempts are collected
 # Failed attempts to open, create or truncate files could be an indication that an individual or process is trying to gain unauthorized access to the system.
@@ -225,7 +225,7 @@
     - section4
     - level_2_server
     - level_2_workstation
-    - p_4.1.10
+    - 4.1.10
 
 # 4.1.11 Ensure use of privileged commands is collected
 - name: 4.1.11 Ensure use of privileged commands is collected
@@ -246,7 +246,7 @@
     - section4
     - level_2_server
     - level_2_workstation
-    - p_4.1.11
+    - 4.1.11
 
 # 4.1.12 Ensure successful file system mounts are collected
 # It is highly unusual for a non privileged user to mount file systems to the system. While tracking mount commands gives the system administrator evidence that external media
@@ -265,7 +265,7 @@
     - section4
     - level_2_server
     - level_2_workstation
-    - p_4.1.12
+    - 4.1.12
 
 # 4.1.13 Ensure file deletion events by users are collected
 # Monitoring these calls from non-privileged users could provide a system administrator with evidence that inappropriate removal of files and file attributes associated with
@@ -281,7 +281,7 @@
     - section4
     - level_2_server
     - level_2_workstation
-    - p_4.1.13
+    - 4.1.13
 
 # 4.1.14 Ensure changes to system administration scope (sudoers) is collected
 # Changes in the /etc/sudoers file can indicate that an unauthorized change has been made to scope of system administrator activity.
@@ -296,7 +296,7 @@
     - section4
     - level_2_server
     - level_2_workstation
-    - p_4.1.14
+    - 4.1.14
 
 # 4.1.15 Ensure system administrator command executions (sudo) are collected
 # # # Creating an audit log of administrators with temporary elevated privileges and the operation(s) they performed is essential to reporting. Administrators will want to correlate the events written to the audit trail with the records written to sudo logfile to verify if unauthorized commands have been executed.
@@ -311,7 +311,7 @@
     - section4
     - level_2_server
     - level_2_workstation
-    - p_4.1.15
+    - 4.1.15
 
 # 4.1.16 Ensure kernel module loading and unloading is collected
 # # # # Monitoring the use of insmod , rmmod and modprobe could provide system administrators with evidence that an unauthorized user loaded or unloaded a kernel module, possibly compromising the security of the system. Monitoring of the init_module and delete_module system calls would reflect an unauthorized user attempting to use a different program to load and unload modules.
@@ -326,7 +326,7 @@
     - section4
     - level_2_server
     - level_2_workstation
-    - p_4.1.16
+    - 4.1.16
 
 # 4.1.17 Ensure the audit configuration is immutable
 # # # In immutable mode, unauthorized users cannot execute changes to the audit system to potentially hide malicious activity and then put the audit rules back. Users would most likely notice a system reboot and that could alert administrators of an attempt to make unauthorized audit changes.
@@ -355,7 +355,7 @@
     - section4
     - level_2_server
     - level_2_workstation
-    - p_4.1.17
+    - 4.1.17
 
 # 4.2 Configure Logging
 # 4.2.1 Configure rsyslog
@@ -369,7 +369,7 @@
     - section4
     - level_1_server
     - level_1_workstation
-    - p_4.2.1.1
+    - 4.2.1.1
 
 # 4.2.1.2 Ensure rsyslog Service is enabled
 - name: 4.2.1.2 Ensure rsyslog Service is enabled
@@ -380,7 +380,7 @@
     - section4
     - level_1_server
     - level_1_workstation
-    - p_4.2.1.2
+    - 4.2.1.2
 
 # 4.2.1.3 Ensure logging is configured
 - name: 4.2.1.3 Ensure logging is configured
@@ -407,7 +407,7 @@
     - section4
     - level_1_server
     - level_1_workstation
-    - p_4.2.1.3
+    - 4.2.1.3
 
 # 4.2.1.4 Ensure rsyslog default file permissions configured
 # It is important to ensure that log files have the correct permissions to ensure that sensitive data is archived and protected.
@@ -420,7 +420,7 @@
     - section4
     - level_1_server
     - level_1_workstation
-    - p_4.2.1.4
+    - 4.2.1.4
 
 # 4.2.1.5 Ensure rsyslog is configured to send logs to a remote log host
 # # Storing log data on a remote host protects log integrity from local attacks. If an attacker gains root access on the local system, they could tamper with or remove log data that is stored on the local system
@@ -435,7 +435,7 @@
     - section4
     - level_1_server
     - level_1_workstation
-    - p_4.2.1.5
+    - 4.2.1.5
 
 # 4.2.1.6 Ensure remote rsyslog messages are only accepted on designated log hosts.
 # The guidance in the section ensures that remote log hosts are configured to only accept rsyslog data from hosts within the specified domain and that those systems that are not designed to be log hosts do not accept any remote rsyslog messages. This provides protection from spoofed log data and ensures that system administrators are reviewing reasonably complete syslog data in a central location.
@@ -460,7 +460,7 @@
     - section4
     - level_1_server
     - level_1_workstation
-    - p_4.2.1.6
+    - 4.2.1.6
 
 # 4.2.2 Configure journald
 # 4.2.2.1 Ensure journald is configured to send logs to rsyslog
@@ -475,7 +475,7 @@
     - section4
     - level_1_server
     - level_1_workstation
-    - p_4.2.2.1
+    - 4.2.2.1
 # 4.2.2.2 Ensure journald is configured to compress large log files
 - name: 4.2.2.2 Ensure journald is configured to compress large log files
   lineinfile:
@@ -487,7 +487,7 @@
     - section4
     - level_1_server
     - level_1_workstation
-    - p_4.2.2.2
+    - 4.2.2.2
 
 # 4.2.2.3 Ensure journald is configured to write logfiles to persistent disk
 # Writing log data to disk will provide the ability to forensically reconstruct events which may have impacted the operations or security of a system even after a system crash or reboot.
@@ -502,7 +502,7 @@
     - section4
     - level_1_server
     - level_1_workstation
-    - p_4.2.2.3
+    - 4.2.2.3
 
 # 4.2.3 Ensure permissions on all logfiles are configured
 # It is important to ensure that log files have the correct permissions to ensure that sensitive data is archived and protected.
@@ -513,7 +513,7 @@
     - section4
     - level_1_server
     - level_1_workstation
-    - p_4.2.3
+    - 4.2.3
 # 4.3 Ensure logrotate is configured
 # # By keeping the log files smaller and more manageable, a system administrator can easily archive these files to another system and spend less time looking through inordinately large log files.
 - name: 4.3 Ensure logrotate is configured
@@ -525,7 +525,7 @@
     - section4
     - level_1_server
     - level_1_workstation
-    - p_4.3
+    - 4.3
 
 # 4.4 Ensure logrotate assigns appropriate permissions
 # It is important to ensure that log files have the correct permissions to ensure that sensitive data is archived and protected.
@@ -540,4 +540,4 @@
     - section4
     - level_1_server
     - level_1_workstation
-    - p_4.4
+    - 4.4

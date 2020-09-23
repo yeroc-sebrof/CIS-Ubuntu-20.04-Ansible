@@ -10,5 +10,16 @@ galaxy_info:
       versions:
         - 20.04
 
-  galaxy_tags: [ansible, CIS, Ubuntu, Hardening, Security, Linux, Secure]
+  galaxy_tags:
+    [
+      ansible,
+      CIS,
+      Ubuntu,
+      Hardening,
+      Security,
+      Linux,
+      Secure,
+      cisecurity,
+      automation,
+    ]
 dependencies: []
