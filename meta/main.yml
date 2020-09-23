@@ -18,8 +18,8 @@ galaxy_info:
       ubuntu,
       hardening,
       security,
-      linux,
-      secure,
+      system,
+      cloud,
       cisecurity,
       automation,
     ]

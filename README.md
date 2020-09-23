@@ -3,7 +3,7 @@
 </div>
 
 
-Ansible CIS Ubuntu 20.04 LTS [![Build Status](https://travis-ci.com/alivx/CIS-Ubuntu-20.04-Ansible.svg?branch=master)](https://travis-ci.com/alivx/CIS-Ubuntu-20.04-Ansible)
+Ansible CIS Ubuntu 20.04 LTS Hardening [![Build Status](https://travis-ci.com/alivx/CIS-Ubuntu-20.04-Ansible.svg?branch=master)](https://travis-ci.com/alivx/CIS-Ubuntu-20.04-Ansible)
 =========
 
 CIS hardened Ubuntu: cyber attack and malware prevention for mission-critical systems
