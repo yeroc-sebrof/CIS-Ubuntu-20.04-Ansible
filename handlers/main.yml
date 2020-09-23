@@ -4,26 +4,20 @@
 #Grub
 - name: grub restart
   command: update-grub
-
 - name: journald restart
   service:
     name: systemd-journald
     state: restarted
-
 - name: auditd restart
   service:
     name: auditd
     state: restarted
-
 - name: audit rules load
   shell: /sbin/augenrules --load && true || true
-  when:
-
 - name: sshd restart
   service:
     name: sshd
     state: restarted
-
 - name: rsyslog restart
   service:
     name: rsyslog

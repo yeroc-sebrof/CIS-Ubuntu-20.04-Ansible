@@ -102,7 +102,7 @@
 # configured to be a client and/or a server.
 - name: 2.2.1.4 Ensure ntp is configured
   block:
-    - name: "Check if NTP is installed"
+    - name: Check if NTP is installed
       package_facts:
         manager: "auto"
     - name: 2.2.1.4 Ensure ntp is configured | modify /etc/ntp.conf

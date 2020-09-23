@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - Auto-CIS-Ubuntu-Linux-20.04-LTS-Remediation
+    - CIS-Ubuntu-20.04-Ansible
