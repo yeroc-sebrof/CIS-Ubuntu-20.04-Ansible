@@ -157,14 +157,14 @@
 # 6.1.11 Ensure no unowned files or directories exist
 - name: 6.1.11 Ensure no unowned files or directories exist
   block:
-    - name: 6.1.11 Ensure no unowned files or directories exist | Find 
+    - name: 6.1.11 Ensure no unowned files or directories exist | Find
       shell: df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -nouser 2> /dev/null && true || true
       register: output_6_1_11
     - name: 6.1.11 Ensure no unowned files or directories exist | Save output
       copy:
         dest: "{{ outputfiles }}/6.1.11"
         content: "{{ output_6_1_11.stdout_lines }}"
-    - name: 6.1.11 Ensure no unowned files or directories exist | Fix 
+    - name: 6.1.11 Ensure no unowned files or directories exist | Fix
       file:
         path: "{{ item }}"
         owner: "{{ withoutOwnerFileDirOwner }}"
@@ -180,14 +180,14 @@
 # 6.1.12 Ensure no ungrouped files or directories exist
 - name: 6.1.12 Ensure no ungrouped files or directories exist
   block:
-    - name: 6.1.12 Ensure no ungrouped files or directories exist | Find 
+    - name: 6.1.12 Ensure no ungrouped files or directories exist | Find
       shell: df --local -P | awk '{if (NR!=1) print $6}' | xargs -I '{}' find '{}' -xdev -nogroup 2> /dev/null && true || true
       register: output_6_1_12
     - name: 6.1.12 Ensure no ungrouped files or directories exist | Save output
       copy:
         dest: "{{ outputfiles }}/6.1.12"
         content: "{{ output_6_1_12.stdout_lines }}"
-    - name: 6.1.12 Ensure no ungrouped files or directories exist | Fix 
+    - name: 6.1.12 Ensure no ungrouped files or directories exist | Fix
       file:
         path: "{{ item }}"
         owner: "{{ withoutOwnerFileDirOwner }}"
@@ -203,7 +203,7 @@
 # 6.1.13 Audit SUID executables
 - name: 6.1.13 Audit SUID executables
   block:
-    - name: 6.1.13 Audit SUID executables | find 
+    - name: 6.1.13 Audit SUID executables | find
       shell: df --local -P | awk '{if (NR!=1) print $6}' | xargs -I '{}' find '{}' -xdev -type f -perm -4000 2> /dev/null && true || true
       register: output_6_1_13
     - name: 6.1.13 Audit SUID executables | save output
@@ -225,7 +225,7 @@
 # 6.1.14 Audit SGID executables
 - name: 6.1.14 Audit SGID executables
   block:
-    - name: 6.1.14 Audit SGID executables | find 
+    - name: 6.1.14 Audit SGID executables | find
       shell: df --local -P | awk '{if (NR!=1) print $6}' | xargs -I '{}' find '{}' -xdev -type f -perm -2000 2> /dev/null && true || true
       register: output_6_1_14
     - name: 6.1.14 Audit SGID executables | save output
@@ -328,7 +328,7 @@
       copy:
         dest: "{{ outputfiles }}/6.2.4"
         content: "{{ output_6_2_4.stdout_lines }}"
-    - name: 6.2.4 Ensure all users' home directories exist | fix 
+    - name: 6.2.4 Ensure all users' home directories exist | fix
       user:
         name: "{{ item }}"
         create_home: yes
@@ -345,34 +345,13 @@
 - name: 6.2.5 Ensure users' home directories permissions are 750 or more restrictive
   block:
     - name: 6.2.5 Ensure users' home directories permissions are 750 or more restrictive | list
-      shell: |
-        > /tmp/.6.2.5
-        grep -E -v '^(halt|sync|shutdown)' /etc/passwd | awk -F: '($7 != "'"$(which nologin)"'" && $7 != "/bin/false") { print $1 " " $6 }' | while read user dir; do
-            if [ ! -d "$dir" ]; then
-                echo "The home directory ($dir) of user $user does not exist."
-            else
-                dirperm=$(ls -ld $dir | cut -f1 -d" ")
-                if [ $(echo $dirperm | cut -c6) != "-" ]; then
-                    echo "$dir" > /tmp/.6.2.5
-                fi
-                if [ $(echo $dirperm | cut -c8) != "-" ]; then
-                    echo "$dir" >> /tmp/.6.2.5
-                fi
-                if [ $(echo $dirperm | cut -c9) != "-" ]; then
-                    echo "$dir" >> /tmp/.6.2.5
-                fi
-                if [ $(echo $dirperm | cut -c10) != "-" ]; then
-                    echo "$dir" >> /tmp/.6.2.5
-                fi
-            fi
-            cat  /tmp/.6.2.5 | sort -n | uniq
-        done
+      script: 6_2_5.sh
       register: output_6_2_5
-    - name: 6.2.5 Ensure users' home directories permissions are 750 or more restrictive | save 
+    - name: 6.2.5 Ensure users' home directories permissions are 750 or more restrictive | save
       copy:
         dest: "{{ outputfiles }}/6.2.5"
         content: "{{ output_6_2_5.stdout_lines }}"
-    - name: 6.2.5 Ensure users' home directories permissions are 750 or more restrictive | fix 
+    - name: 6.2.5 Ensure users' home directories permissions are 750 or more restrictive | fix
       file:
         name: "{{ item }}"
         mode: "g-w,o-rwx"
@@ -389,18 +368,7 @@
 - name: 6.2.6 Ensure users own their home directories
   block:
     - name: 6.2.6 Ensure users own their home directories | list
-      shell: |
-        grep -E -v '^(halt|sync|shutdown)' /etc/passwd | awk -F: '($7 != "'"$(which nologin)"'" && $7 != "/bin/false") { print $1 " " $6 }' | while read user dir; do
-            if [ ! -d "$dir" ]; then
-                # echo "No home directory: $dir of user $user"
-                true
-            else
-                owner=$(stat -L -c "%U" "$dir")
-                if [ "$owner" != "$user" ]; then
-                    echo ${dir},${user}
-                fi
-            fi
-        done
+      script: 6_2_6.sh
       register: output_6_2_6
     - name: 6.2.6 Ensure users own their home directories | Var
       set_fact:
@@ -410,7 +378,7 @@
       copy:
         dest: "{{ outputfiles }}/6.2.6"
         content: "{{ output_6_2_6_list }}"
-    - name: 6.2.6 Ensure users own their home directories | fix 
+    - name: 6.2.6 Ensure users own their home directories | fix
       file:
         path: "{{ item.split(',')[0] }}"
         group: "{{ item.split(',')[1] }}"
@@ -427,25 +395,8 @@
 # 6.2.7 Ensure users' dot files are not group or world writable
 - name: 6.2.7 Ensure users dot files are not group or world writable
   block:
-    - name: 6.2.7 Ensure users dot files are not group or world writable | list 
-      shell: |
-        grep -E -v '^(halt|sync|shutdown)' /etc/passwd | awk -F: '($7 != "'"$(which nologin)"'" && $7 != "/bin/false") { print $1 " " $6 }' | while read user dir; do
-            if [ ! -d "$dir" ]; then
-                echo "The home directory ($dir) of user $user does not exist."
-            else
-                for file in $dir/.[A-Za-z0-9]*; do
-                    if [ ! -h "$file" -a -f "$file" ]; then
-                        fileperm=$(ls -ld $file | cut -f1 -d" ")
-                        if [ $(echo $fileperm | cut -c6) != "-" ]; then
-                            echo "Group Write permission set on file $file"
-                        fi
-                        if [ $(echo $fileperm | cut -c9) != "-" ]; then
-                            echo "Other Write permission set on file $file"
-                        fi
-                    fi
-                done
-            fi
-        done
+    - name: 6.2.7 Ensure users dot files are not group or world writable | list
+      script: 6_2_7.sh
       register: output_6_2_7
     - name: 6.2.7 Ensure users' dot files are not group or world writable | save output
       copy:
@@ -462,22 +413,12 @@
 - name: 6.2.8 Ensure no users have .forward files
   block:
     - name: 6.2.8 Ensure no users have .forward files | list
-      shell: |
-        grep -E -v '^(root|halt|sync|shutdown)' /etc/passwd | awk -F: '($7 != "'"$(which nologin)"'" && $7 != "/bin/false") { print $1 " " $6 }' | while read user dir; do
-            if [ ! -d "$dir" ]; then
-                echo "The home directory ($dir) of user $user does not exist."
-            else
-                if [ ! -h "$dir/.forward" -a -f "$dir/.forward" ]; then
-                    echo ".forward file $dir/.forward exists"
-                fi
-            fi
-        done
+      script: 6_2_8.sh
       register: output_6_2_8
     - name: 6.2.8 Ensure no users have .forward files  | save output
       copy:
         dest: "{{ outputfiles }}/6.2.8"
         content: "{{ output_6_2_8.stdout }}"
-
   tags:
     - section6
     - level_1_server
@@ -488,22 +429,12 @@
 - name: 6.2.9 Ensure no users have .netrc files
   block:
     - name: 6.2.9 Ensure no users have .netrc files | list
-      shell: |
-        grep -E -v '^(root|halt|sync|shutdown)' /etc/passwd | awk -F: '($7 !="'"$(which nologin)"'" && $7 != "/bin/false") { print $1 " " $6 }' | while read user dir; do
-            if [ ! -d "$dir" ]; then
-                echo "The home directory ($dir) of user $user does not exist."
-            else
-                if [ ! -h "$dir/.netrc" -a -f "$dir/.netrc" ]; then
-                    echo ".netrc file $dir/.netrc exists"
-                fi
-            fi
-        done
+      script: 6_2_9.sh
       register: output_6_2_9
     - name: 6.2.9 Ensure no users have .netrc files | save output
       copy:
         dest: "{{ outputfiles }}/6.2.9"
         content: "{{ output_6_2_9.stdout }}"
-
   tags:
     - section6
     - level_1_server
@@ -514,36 +445,7 @@
 - name: 6.2.10 Ensure users' .netrc Files are not group or world accessible
   block:
     - name: 6.2.10 Ensure users' .netrc Files are not group or world accessible | list
-      shell: |
-        grep -E -v '^(root|halt|sync|shutdown)' /etc/passwd | awk -F: '($7 !="'"$(which nologin)"'" && $7 != "/bin/false") { print $1 " " $6 }' | while read user dir; do
-            if [ ! -d "$dir" ]; then
-                echo "The home directory ($dir) of user $user does not exist."
-            else
-                for file in $dir/.netrc; do
-                    if [ ! -h "$file" -a -f "$file" ]; then
-                        fileperm=$(ls -ld $file | cut -f1 -d" ")
-                        if [ $(echo $fileperm | cut -c5) != "-" ]; then
-                            echo "Group Read set on $file"
-                        fi
-                        if [ $(echo $fileperm | cut -c6) != "-" ]; then
-                            echo "Group Write set on $file"
-                        fi
-                        if [ $(echo $fileperm | cut -c7) != "-" ]; then
-                            echo "Group Execute set on $file"
-                        fi
-                        if [ $(echo $fileperm | cut -c8) != "-" ]; then
-                            echo "Other Read set on $file"
-                        fi
-                        if [ $(echo $fileperm | cut -c9) != "-" ]; then
-                            echo "Other Write set on $file"
-                        fi
-                        if [ $(echo $fileperm | cut -c10) != "-" ]; then
-                            echo "Other Execute set on $file"
-                        fi
-                    fi
-                done
-            fi
-        done
+      script: files/6_2_10.sh
       register: output_6_2_10
     - name: 6.2.10 Ensure users' .netrc Files are not group or world accessible | save output
       copy:
@@ -560,18 +462,7 @@
 - name: 6.2.11 Ensure no users have .rhosts files
   block:
     - name: 6.2.11 Ensure no users have .rhosts files | list
-      shell: |
-        grep -E -v '^(root|halt|sync|shutdown)' /etc/passwd | awk -F: '($7 !="'"$(which nologin)"'" && $7 != "/bin/false") { print $1 " " $6 }' | while read user dir; do
-            if [ ! -d "$dir" ]; then
-                echo "The home directory ($dir) of user $user does not exist."
-            else
-                for file in $dir/.rhosts; do
-                    if [ ! -h "$file" -a -f "$file" ]; then
-                        echo ".rhosts file in $dir"
-                    fi
-                done
-            fi
-        done
+      script: files/6_2_11.sh
       register: output_6_2_11
     - name: 6.2.11 Ensure no users have .rhosts files | save output
       copy:
