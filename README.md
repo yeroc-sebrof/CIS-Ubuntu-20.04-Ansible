@@ -293,7 +293,7 @@ _________________
   - 3.5.1.5 Ensure outbound connections are configured (Manual)
   - 3.5.1.6 Ensure firewall rules exist for all open ports (Manual)
   - 3.5.1.7 Ensure default deny firewall policy (Automated)
-  - 3.5.2 Configure nftables
+  <!-- - 3.5.2 Configure nftables
   - 3.5.2.1 Ensure nftables is installed (Automated)
   - 3.5.2.2 Ensure Uncomplicated Firewall is not installed or disabled - (Automated)
   - 3.5.2.3 Ensure iptables are flushed (Manual)
@@ -315,7 +315,7 @@ _________________
   - 3.5.3.3.1 Ensure IPv6 default deny firewall policy (Automated)
   - 3.5.3.3.2 Ensure IPv6 loopback traffic is configured (Automated)
   - 3.5.3.3.3 Ensure IPv6 outbound and established connections are - configured (Manual)
-  - 3.5.3.3.4 Ensure IPv6 firewall rules exist for all open ports - (Manual)
+  - 3.5.3.3.4 Ensure IPv6 firewall rules exist for all open ports - (Manual) -->
 
 **4 Logging and Auditing**
   - 4.1 Configure System Accounting (auditd)
@@ -343,7 +343,8 @@ _________________
   - 4.1.15 Ensure system administrator command executions (sudo) are - collected (Automated)
   - 4.1.16 Ensure kernel module loading and unloading is collected - (Automated)
   - 4.1.17 Ensure the audit configuration is immutable (Automated)
-  - 4.2 Configure Logging
+  
+**4.2 Configure Logging**
   - 4.2.1 Configure rsyslog
   - 4.2.1.1 Ensure rsyslog is installed (Automated)
   - 4.2.1.2 Ensure rsyslog Service is enabled (Automated)
@@ -400,7 +401,8 @@ _________________
   - 5.3.2 Ensure lockout for failed password attempts is configured - (Automated)
   - 5.3.3 Ensure password reuse is limited (Automated)
   - 5.3.4 Ensure password hashing algorithm is SHA-512 (Automated)
-  - 5.4 User Accounts and Environment
+
+**5.4 User Accounts and Environment**
   - 5.4.1 Set Shadow Password Suite Parameters
   - 5.4.1.1 Ensure password expiration is 365 days or less (Automated)
   - 5.4.1.2 Ensure minimum days between password changes is configured - (Automated)
