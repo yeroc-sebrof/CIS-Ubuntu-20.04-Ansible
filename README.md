@@ -463,7 +463,7 @@ _________________
 License
 -------
 
-BSD
+ GNU GENERAL PUBLIC LICENSE
 
 Author Information
 ------------------
