@@ -15,12 +15,10 @@
         group: root
         mode: 0644
         create: true
-
     - name: 1.1.1.1 Ensure mounting of cramfs filesystems is disabled | modprobe
       modprobe:
         name: cramfs
         state: absent
-
   when: disable_cramfs
   tags:
     - section1
@@ -30,7 +28,6 @@
     - filesystems
     - cramfs
     - modprobe
-
 # 1.1.1.2 Ensure mounting of freevxfs filesystems is disabled
 # The freevxfs filesystem type is a free version of the Veritas type filesystem. This is the
 # primary filesystem type for HP-UX operating systems.
@@ -43,7 +40,6 @@
         line: "install freevxfs /bin/true"
         state: present
         create: true
-
     - name: 1.1.1.2 Ensure mounting of freevxfs filesystems is disabled | modprobe
       modprobe:
         name: freevxfs
@@ -57,7 +53,6 @@
     - filesystems
     - freevxfs
     - modprobe
-
 # 1.1.1.3 Ensure mounting of jffs2 filesystems is disabled
 # The jffs2 (journaling flash filesystem 2) filesystem type is a log-structured filesystem used
 # in flash memory devices.
@@ -70,7 +65,6 @@
         line: "install jffs2 /bin/true"
         state: present
         create: true
-
     - name: 1.1.1.3 Ensure mounting of jffs2 filesystems is disabled
       modprobe:
         name: jffs2
@@ -84,7 +78,6 @@
     - filesystems
     - jffs2
     - modprobe
-
 # 1.1.1.4 Ensure mounting of hfs filesystems is disabled
 # The hfs filesystem type is a hierarchical filesystem that allows you to mount Mac OS
 # filesystems.
@@ -97,7 +90,6 @@
         line: "install hfs /bin/true"
         state: present
         create: true
-
     - name: 1.1.1.4 Ensure mounting of hfs filesystems is disabled | modprobe
       modprobe:
         name: hfs
@@ -111,7 +103,6 @@
     - filesystems
     - modprobe
     - hfs
-
 # 1.1.1.5 Ensure mounting of hfsplus filesystems is disabled
 # The hfsplus filesystem type is a hierarchical filesystem designed to replace hfs that allows
 # you to mount Mac OS filesystems.
@@ -124,7 +115,6 @@
         line: "install hfsplus /bin/true"
         state: present
         create: true
-
     - name: 1.1.1.5 Ensure mounting of hfsplus filesystems is disabled | modprobe
       modprobe:
         name: hfsplus
@@ -138,7 +128,6 @@
     - filesystems
     - hfsplus
     - modprobe
-
 # 1.1.1.6 Ensure mounting of udf filesystems is disabled
 # The udf filesystem type is the universal disk format used to implement ISO/IEC 13346 and
 # ECMA-167 specifications. This is an open vendor filesystem type for data storage on a
@@ -153,7 +142,6 @@
         line: "install udf /bin/true"
         state: present
         create: true
-
     - name: 1.1.1.6 Ensure mounting of udf filesystems is disabled | modprobe
       modprobe:
         name: udf
@@ -167,7 +155,6 @@
     - filesystems
     - udf
     - modprobe
-
 # 1.1.1.7 Ensure mounting of FAT filesystems is limited
 # The FAT filesystem format is primarily used on older windows systems and portable USB
 # drives or flash modules. It comes in three types FAT12 , FAT16 , and FAT32 all of which are
@@ -184,7 +171,6 @@
         line: "install vfat /bin/true"
         state: present
         create: true
-
     - name: 1.1.1.7 Ensure mounting of FAT filesystems is limited | modprobe
       modprobe:
         name: vfat
@@ -198,7 +184,8 @@
     - filesystems
     - fat
     - modprobe
-# # 1.1.2 Ensure /tmp is configured
+#
+# 1.1.2 Ensure /tmp is configured
 # The /tmp directory is a world-writable directory used for temporary storage by all users
 # and some applications.
 # Notes:
@@ -220,17 +207,14 @@
         mode: 0644
         force: true
         remote_src: true
-
     - name: 1.1.2 Ensure /tmp is configured | edit file
       lineinfile:
         dest: /etc/systemd/system/tmp.mount
         regexp: "^Options=mode="
         line: "Options=mode=1777,strictatime,nosuid,nodev,noexec,size={{ temp_dir_size }}"
-
     - name: 1.1.2 Ensure /tmp is configured | reload demon
       systemd:
         daemon_reload: yes
-
     - name: 1.1.2 Ensure /tmp is configured | enable and start tmp.mount
       systemd:
         name: tmp.mount
@@ -271,7 +255,6 @@
     - 1.1.9
     - mount
     - shm
-
 # 1.1.10 Ensure separate partition exists for /var
 # The /var directory is used by daemons and other system services to temporarily store
 # dynamic data. Some directories created by these processes may be world-writable.
@@ -396,17 +379,14 @@
       shell: |
         df --local -P | awk '{if (NR!=1) print $6}' | xargs -I '{}' find '{}' -xdev -type d \( -perm -0002 -a ! -perm -1000 \) 2>/dev/null
       register: worldWriteableList
-
     - name: 1.1.22 Ensure sticky bit is set on all world-writable directories | fix
       script: 1_1_22.sh
       when: worldWriteableList.stdout_lines |length > 0
-
   tags:
     - section1
     - level_1_server
     - level_1_workstation
     - 1.1.22
-
 # 1.1.23 Disable Automounting
 # autofs allows automatic mounting of devices, typically including CD/DVDs and USB drives.
 # Note: This control should align with the tolerance of the use of portable drives and optical
@@ -432,7 +412,6 @@
     - level_1_server
     - level_2_workstation
     - 1.1.23
-
 # 1.1.24 Disable USB Storage
 # USB storage provides a means to transfer and store files insuring persistence and
 # availability of the files independent of network connection status. Its popularity and utility
@@ -460,8 +439,7 @@
     - level_1_server
     - level_2_workstation
     - 1.1.24
-
-# # 1.2 Configure Software Updates
+# 1.2 Configure Software Updates
 # For the purpose of this benchmark, the requirement is to ensure that a patch management
 # system is configured and maintained. The specifics on patch update procedures are left to
 # the organization.
@@ -575,7 +553,6 @@
         install_recommends: false
     - name: Configure AIDE as appropriate for your environment | aideinit
       command: aideinit
-
     - name: Configure AIDE as appropriate for your environment | aideinit db
       shell: |
         mv /var/lib/aide/aide.db.new /var/lib/aide/aide.db
@@ -737,7 +714,6 @@
     - level_1_server
     - level_1_workstation
     - 1.6.3
-
 # 1.6.4 Ensure core dumps are restricted
 # A core dump is the memory of an executable program. It is generally used to determine
 # why a program aborted. It can also be used to glean confidential information from a core
@@ -772,7 +748,7 @@
     - level_1_server
     - level_1_workstation
     - 1.6.4
-# # 1.7 Mandatory Access Control
+# 1.7 Mandatory Access Control
 # Mandatory Access Control (MAC) provides an additional layer of access restrictions to
 # processes on top of the base Discretionary Access Controls. By restricting how processes
 # can access files and resources on a system the potential impact from vulnerabilities in the
@@ -780,7 +756,7 @@
 # Impact: Mandatory Access Control limits the capabilities of applications and daemons on a
 # system, while this can prevent unauthorized access the configuration of MAC can be complex
 # and difficult to implement correctly preventing legitimate access from occurring.
-# # 1.7.1 Configure AppArmor
+# 1.7.1 Configure AppArmor
 # 1.7.1.1 Ensure AppArmor is installed
 # AppArmor provides Mandatory Access Controls.
 - name: 1.7.1.1 Ensure AppArmor is installed
@@ -833,12 +809,12 @@
     - level_2_workstation
     - 1.7.1.3
     - 1.7.1.4
-# # 1.8 Warning Banners
+# 1.8 Warning Banners
 # Presenting a warning message prior to the normal user login may assist in the prosecution
 # of trespassers on the computer system. Changing some of these login banners also has the
 # side effect of hiding OS version information and other detailed system information from
 # attackers attempting to target specific exploits at a system.
-# # 1.8.1 Command Line Warning Banners
+# 1.8.1 Command Line Warning Banners
 # The /etc/motd , /etc/issue , and /etc/issue.net files govern warning banners for
 # standard command line logins for both local and remote users.
 # 1.8.1.1 Ensure message of the day is configured properly

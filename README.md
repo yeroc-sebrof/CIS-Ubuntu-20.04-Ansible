@@ -19,18 +19,18 @@ CIS benchmark recommendations are adopted in virtual machines in public and priv
 If you are attempting to obtain compliance against an industry-accepted security standard, like PCI DSS, APRA or ISO 27001, then you need to demonstrate that you have applied documented hardening standards against all systems within the scope of assessment.
 
 
-The Ubuntu CIS benchmarks are organised into different profiles, namely **‘Level 1’** and **‘Level 2’** intended for server and workstation environments.  
+The Ubuntu CIS benchmarks are organised into different profiles, namely **‘Level 1’** and **‘Level 2’** intended for server and workstation environments.
 
 
-**A Level 1 profile** is intended to be a practical and prudent way to secure a system without too much performance impact. 
-* Disabling unneeded filesystems, 
-* Restricting user permissions to files and directories, 
+**A Level 1 profile** is intended to be a practical and prudent way to secure a system without too much performance impact.
+* Disabling unneeded filesystems,
+* Restricting user permissions to files and directories,
 * Disabling unneeded services.
 * Configuring network firewalls.
 
 **A Level 2 profile** is used where security is considered very important and it may have a negative impact on the performance of the system.
 
-* Creating separate partitions, 
+* Creating separate partitions,
 * Auditing privileged operations
 
 The Ubuntu CIS hardening tool allows you to select the desired level of hardening against a profile (Level1 or Level 2) and the work environment (server or workstation) for a system.
@@ -44,7 +44,7 @@ ansible-playbook -i host run.yaml --list-tags
 ```
 
 
-I wrote all roles based on 
+I wrote all roles based on
 ```Text
 CIS Ubuntu Linux 20.04 LTS Benchmark
 v1.0.0 - 07-21-2020
@@ -60,7 +60,7 @@ Requirements
 
 You should carefully read through the tasks to make sure these changes will not break your systems before running this playbook.
 
-You can download Free CIS Benchmark book from this URL 
+You can download Free CIS Benchmark book from this URL
 [Free Benchmark](https://learn.cisecurity.org/benchmarks)
 
 
@@ -73,7 +73,7 @@ _________________
 Role Variables
 --------------
 
-You have to review all default configuration before running this playbook, There are many role variables defined in defaults/main.yml. 
+You have to review all default configuration before running this playbook, There are many role variables defined in defaults/main.yml.
 
 * If you are considering applying this role to any servers, you should have a basic familiarity with the CIS Benchmark and an appreciation for the impact that it may have on a system.
 * Read and change configurable default values.
@@ -103,7 +103,7 @@ _________________
 Dependencies
 ------------
 
-* Ansible version > 2.9 
+* Ansible version > 2.9
 
 _________________
 
@@ -196,13 +196,13 @@ _________________
 
   - 1.4.1 Ensure AIDE is installed (Automated)
   - 1.4.2 Ensure filesystem integrity is regularly checked (Automated)
-  
+
 **1.5 Secure Boot Settings**
 
   - 1.5.1 Ensure bootloader password is set (Automated)
   - 1.5.2 Ensure permissions on bootloader config are configured - (Automated)
   - 1.5.3 Ensure authentication required for single user mode (Automated)
-  
+
 **1.6 Additional Process Hardening**
   - 1.6.1 Ensure XD/NX support is enabled (Automated)
   - 1.6.2 Ensure address space layout randomization (ASLR) is enabled - (Automated)
@@ -348,7 +348,7 @@ _________________
   - 4.1.15 Ensure system administrator command executions (sudo) are - collected (Automated)
   - 4.1.16 Ensure kernel module loading and unloading is collected - (Automated)
   - 4.1.17 Ensure the audit configuration is immutable (Automated)
-  
+
 **4.2 Configure Logging**
   - 4.2.1 Configure rsyslog
   - 4.2.1.1 Ensure rsyslog is installed (Automated)

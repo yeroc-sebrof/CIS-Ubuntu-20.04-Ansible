@@ -15,7 +15,6 @@
     - level_1_server
     - level_1_workstation
     - 2.1.1
-
 # 2.1.2 Ensure openbsd-inetd is not installed
 # The inetd daemon listens for well known services and dispatches the appropriate daemon
 # to properly respond to service requests.
@@ -29,7 +28,6 @@
     - level_1_server
     - level_1_workstation
     - 2.1.2
-
 # 2.2 Special Purpose Services
 # 2.2.1 Time Synchronization
 # If access to a physical host's clock is available and configured according to site policy,
@@ -55,19 +53,16 @@
         name: ["ntp"]
         state: present
         install_recommends: false
-
     - name: 2.2.1.1 Ensure time synchronization is in use - service start
       service:
         name: "ntp"
         state: started
         enabled: true
-
   tags:
     - section2
     - level_1_server
     - level_1_workstation
     - 2.2.1.1
-
 # 2.2.1.2 Ensure systemd-timesyncd is configured
 # The systemd-timesyncd service specifically implements only SNTP. This minimalistic
 # service will set the system clock for large offsets or slowly adjust it for smaller deltas.
@@ -84,7 +79,6 @@
     - level_1_server
     - level_1_workstation
     - 2.2.1.2
-
 # 2.2.1.3 Ensure chrony is configured
 - name: 2.2.1.3 Ensure chrony is configured
   debug:
@@ -94,7 +88,6 @@
     - level_1_server
     - level_1_workstation
     - 2.2.1.3
-
 # 2.2.1.4 Ensure ntp is configured
 # ntp is a daemon which implements the Network Time Protocol (NTP). It is designed to
 # synchronize system clocks across a variety of systems and use a source that is highly
@@ -113,7 +106,6 @@
         group: root
         mode: 0644
       when: "'ntp' in ansible_facts.packages"
-
     - name: 2.2.1.4 Ensure ntp is configured | modify /etc/init.d/ntp
       lineinfile:
         dest: /etc/init.d/ntp
@@ -125,7 +117,6 @@
     - level_1_server
     - level_1_workstation
     - 2.2.1.4
-
 # 2.2.2 Ensure X Window System is not installed
 # Many Linux systems run applications which require a Java runtime. Some Linux Java
 # packages have a dependency on specific X Windows xorg-x11-fonts. One workaround to
@@ -140,7 +131,6 @@
     - section2
     - level_1_server
     - 2.2.2
-
 # 2.2.3 Ensure Avahi Server is not installed
 # Avahi is a free zeroconf implementation, including a system for multicast DNS/DNS-SD
 # service discovery. Avahi allows programs to publish and discover services and hosts
