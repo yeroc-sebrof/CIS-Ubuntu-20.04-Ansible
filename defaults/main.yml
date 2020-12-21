@@ -24,6 +24,10 @@ allowed_users: ali saleh baker root #Put None or list of users space between eac
 allowed_groups: None
 deny_users: None
 deny_groups: None
+## 5.2.21 Ensure SSH MaxStartups is configured
+ssh_max_Startups: "10:30:100"
+# 5.2.22 Ensure SSH MaxSessions is limited
+ssh_max_sessions: 10
 # 5.4.1.1 Ensure password expiration is 365 days or less
 pass_expire_in_days: 300
 pass_warn_age: 7
