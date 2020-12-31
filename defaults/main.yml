@@ -19,6 +19,10 @@ install_apparmor: true
 #Section 5
 #5.1.8 Ensure cron is restricted to authorized users
 allowd_hosts: "ALL: 0.0.0.0/0.0.0.0, 192.168.2.0/255.255.255.0"
+# 5.2.13 Ensure only strong MAC algorithms are used
+ssh_MACs: "hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512,hmac-sha2-256"
+# 5.2.14 Ensure only strong Key Exchange algorithms are used
+ssh_key_algorithms: "curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-group14-sha256,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,ecdh-sha2-nistp521,ecdh-sha2-nistp384,ecdh-sha2-nistp256,diffie-hellman-group-exchange-sha256"
 # 5.2.17 Ensure SSH access is limited
 allowed_users: ali saleh baker root #Put None or list of users space between each user
 allowed_groups: None
