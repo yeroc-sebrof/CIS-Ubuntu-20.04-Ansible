@@ -313,7 +313,7 @@
     state: present
     dest: /etc/ssh/sshd_config
     regexp: "^MACs"
-    line: "MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512,hmac-sha2-256"
+    line: "MACs {{ ssh_MACs }}"
   tags:
     - section5
     - level_1_server
@@ -326,7 +326,7 @@
     state: present
     dest: /etc/ssh/sshd_config
     regexp: "^KexAlgorithms"
-    line: "KexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-group14-sha256,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,ecdh-sha2-nistp521,ecdh-sha2-nistp384,ecdh-sha2-nistp256,diffie-hellman-group-exchange-sha256"
+    line: "KexAlgorithms {{ ssh_key_algorithms }}"
   tags:
     - section5
     - level_1_server
