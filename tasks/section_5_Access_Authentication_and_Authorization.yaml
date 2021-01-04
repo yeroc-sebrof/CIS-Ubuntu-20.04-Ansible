@@ -716,21 +716,21 @@
         dest: /etc/bash.bashrc
         create: true
         regexp: "^TMOUT="
-        line: "TMOUT={{ shell_timeout_sec }} ; readonly TMOUT ;export TMOUT"
+        line: "TMOUT={{ shell_timeout_sec }} ; readonly TMOUT ; export TMOUT"
     - name: 5.4.5 Ensure default user shell timeout is 900 seconds or less | /etc/profile
       lineinfile:
         state: present
         dest: /etc/profile
         create: true
         regexp: "^TMOUT="
-        line: "TMOUT={{ shell_timeout_sec }} ; readonly TMOUT; export TMOUT"
+        line: "TMOUT={{ shell_timeout_sec }} ; readonly TMOUT ; export TMOUT"
     - name: 5.4.5 Ensure default user shell timeout is 900 seconds or less | /etc/profile.d/timeout.sh
       lineinfile:
         state: present
         dest: /etc/profile.d/tmout.sh
         create: true
         regexp: "^TMOUT="
-        line: "TMOUT={{ shell_timeout_sec }} ; readonly TMOUT; export TMOUT"
+        line: "TMOUT={{ shell_timeout_sec }} ; readonly TMOUT ; export TMOUT"
   tags:
     - section5
     - level_1_server
