@@ -737,7 +737,10 @@
         state: present
         create: true
         insertbefore: "# End of file"
-
+    - name: 1.6.4 Ensure core dumps are restricted
+      apt:
+        name: systemd-coredump
+        state: present
     - name: 1.6.4 Ensure core dumps are restricted
       lineinfile:
         dest: /etc/systemd/coredump.conf
@@ -746,7 +749,6 @@
         state: present
         create: true
         insertbefore: "# End of file"
-
     - name: 1.6.4 Ensure core dumps are restricted
       lineinfile:
         dest: /etc/systemd/coredump.conf
@@ -755,11 +757,6 @@
         state: present
         create: true
         insertbefore: "# End of file"
-
-    - name: 1.6.4 Ensure core dumps are restricted
-      apt:
-        name: systemd-coredump
-        state: present
     - name: 1.6.4 Ensure core dumps are restricted | reload
       shell: systemctl daemon-reload
   tags:
