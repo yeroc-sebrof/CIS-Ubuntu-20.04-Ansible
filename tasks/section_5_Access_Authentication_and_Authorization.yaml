@@ -113,9 +113,9 @@
     - level_1_workstation
     - 5.1.8
 # 5.1.9 Ensure at is restricted to authorized users
-- name: 5.1.9 Ensure cron is restricted to authorized users
+- name: 5.1.9 Ensure at is restricted to authorized users
   block:
-    - name: 5.1.9 Ensure cron is restricted to authorized users | /etc/at.deny
+    - name: 5.1.9 Ensure at is restricted to authorized users | /etc/at.deny
       file:
         path: /etc/at.deny
         state: absent
@@ -123,7 +123,7 @@
     - stat:
         path: /etc/at.allow
       register: cfile
-    - name: 5.1.9 Ensure cron is restricted to authorized users | /etc/at.allow
+    - name: 5.1.9 Ensure at is restricted to authorized users | /etc/at.allow
       file:
         path: /etc/at.allow
         state: "{{ 'file' if cfile.stat.exists else 'touch' }}"
