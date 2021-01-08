@@ -10,6 +10,10 @@ disable_hfsplus: yes
 disable_udf: yes
 disable_fat: yes
 temp_dir_size: 1G
+## 1.5.1 Ensure bootloader password is set (using grub): default is no
+set_bootloader_credentials: no
+### Update the default bootloader user and password
+bootloader_credentials: { user: "root", password: "b00tl04derPwd" }
 
 # Section 2 Settings
 time_synchronization_package_name: ntp

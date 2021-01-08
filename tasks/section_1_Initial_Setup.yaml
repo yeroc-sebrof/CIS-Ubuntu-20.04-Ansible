@@ -594,26 +594,52 @@
 # Note: This recommendation is designed around the grub bootloader, if LILO or another
 # bootloader is in use in your environment enact equivalent settings. Replace
 # /boot/grub/grub.cfg with the appropriate grub configuration file for your environment.
-- name: 1.5.1 Ensure bootloader password is set | DIY
-  debug:
-    msg: |
-      Create an encrypted password with grub-mkpasswd-pbkdf2 :
-      # grub-mkpasswd-pbkdf2
-      Enter password: <password>
-      Reenter password: <password>
-      PBKDF2 hash of your password is <encrypted-password>
-      Add the following into a custom /etc/grub.d configuration file:
-      cat <<EOF
-      set superusers="<username>"
-      password_pbkdf2 <username> <encrypted-password>
-      EOF
-      More info: https://help.ubuntu.com/community/Grub2/Passwords
+- name: 1.5.1 Ensure bootloader password is set
+  block:
+    - name: 1.5.1 Ensure bootloader password is set - step 1 - check if it isn't already set up
+      shell: /bin/grep -e "^[\s]*password" /boot/grub/grub.cfg | /usr/bin/awk '{print} END {if (NR == 0) print "continue" ; else print "stop"}'
+      register: result
+      ignore_errors: true
+
+    - name: 1.5.1 Ensure bootloader password is set - step 2 - create bootloader password hash
+      # bash -c must be used in this strange way or mysterious errors are thrown
+      shell: /bin/bash -c "echo -e '{{ bootloader_credentials.password }}\n{{ bootloader_credentials.password }}' | grub-mkpasswd-pbkdf2" | /bin/grep 'hash of your password' | /usr/bin/awk '{print $7}'
+      register: password
+      when:
+        - result.stdout == "continue"
+        - bootloader_credentials.user
+        - bootloader_credentials.password
+
+    - name: 1.5.1 Ensure bootloader password is set - step 3 - create custom grub configuration file
+      blockinfile:
+        dest: /etc/grub.d/99_custom
+        create: yes
+        mode: 0700
+        block: |
+          #!/bin/sh
+          cat <<EOF
+          set superusers='{{ bootloader_credentials.user }}'
+          password_pbkdf2 {{ bootloader_credentials.user }} {{ password.stdout }}
+          EOF
+        state: present
+      when:
+        - result.stdout == "continue"
+        - bootloader_credentials.user
+        - bootloader_credentials.password
+
+    - name: 1.5.1 Ensure bootloader password is set - step 4 - update grub
+      shell: update-grub
+      when:
+        - result.stdout == "continue"
+        - bootloader_credentials.user
+        - bootloader_credentials.password
+  when: set_bootloader_credentials
   tags:
     - section1
     - level_1_server
     - level_1_workstation
     - 1.5.1
-    - diy
+
 # 1.5.2 Ensure permissions on bootloader config are configured
 # The grub configuration file contains information on boot settings and passwords for
 # unlocking boot options. The grub configuration is usually grub.cfg stored in /boot/grub/ .
