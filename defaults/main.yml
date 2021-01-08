@@ -1,6 +1,7 @@
 ---
-# defaults file for Auto-CIS-Ubuntu-Linux-20.04-LTS-Remediation
-#Section 1
+# Defaults file for Auto-CIS-Ubuntu-Linux-20.04-LTS-Remediation
+
+# Section 1
 disable_cramfs: yes
 disable_freevxfs: yes
 disable_jffs2: yes
@@ -9,65 +10,15 @@ disable_hfsplus: yes
 disable_udf: yes
 disable_fat: yes
 temp_dir_size: 1G
-# Section 6
-withoutOwnerFileDirOwner: root
-withoutGroupFilesDirGroup: root
-outputfiles: /home/ali/ #Output dir of some command
-disable_autofs: true
-disable_usb: true
-install_apparmor: true
-#Section 5
-#5.1.8 Ensure cron is restricted to authorized users
-allowd_hosts: "ALL: 0.0.0.0/0.0.0.0, 192.168.2.0/255.255.255.0"
-# 5.2.13 Ensure only strong MAC algorithms are used
-ssh_MACs: "hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512,hmac-sha2-256"
-# 5.2.14 Ensure only strong Key Exchange algorithms are used
-ssh_key_algorithms: "curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-group14-sha256,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,ecdh-sha2-nistp521,ecdh-sha2-nistp384,ecdh-sha2-nistp256,diffie-hellman-group-exchange-sha256"
-# 5.2.17 Ensure SSH access is limited
-allowed_users: ali saleh baker root #Put None or list of users space between each user
-allowed_groups: None
-deny_users: None
-deny_groups: None
-## 5.2.21 Ensure SSH MaxStartups is configured
-ssh_max_startups: "10:30:100"
-# 5.2.22 Ensure SSH MaxSessions is limited
-ssh_max_sessions: 10
-# 5.4.1.1 Ensure password expiration is 365 days or less
-pass_expire_in_days: 300
-pass_warn_age: 7
-pass_min_days: 1
-# 5.4.1.1 Ensure password expiration is 365 days or less
-list_of_os_users:
-  - ali
-#5.4.1.4 Ensure inactive password lock is 30 days or less
-#Note: A value of -1 would disable this setting
-account_inactive: 30
-# 5.4.5 Ensure default user shell timeout is 900 seconds or less
-shell_timeout_sec: 900
-#Section 4 Settings
-#Ensure rsyslog is configured to send logs to a remote log host
-remoteSyslog:
-  enable: false
-  host: 192.168.2.100
-  port: 514
-  protocol: tcp
-logrotate_policy: "daily"
-# Section 4 | auditd config
-architecture: "x86_64"
-admin_space_left_action: halt
-max_log_file_action: keep_logs
-max_log_file: 10
-backlog_limit: "8192"
-space_left_action: email
-action_mail_acct: root
-grub_backlog_limit: 8192
-#Section 3 Setting
-disable_wifi: False
-IPv6_is_enabled: Yes
-enable_firewall: yes
-list_of_ports_to_allow:
-  - { rule: "allow", port: "8080", proto: "tcp" }
-#Section 2 Settings
+## 1.5.1 Ensure bootloader password is set (using grub): default is no
+set_bootloader_credentials: no
+### Update the default bootloader user and password
+bootloader_credentials: { user: "root", password: "b00tl04derPwd" }
+# 1.5.3 Ensure authentication required for single user mode
+set_root_password: yes
+root_password: r00tP4ssw0rd
+
+# Section 2 Settings
 time_synchronization_package_name: ntp
 time_synchronization_servers:
   - uri: "time1.google.com"
@@ -102,3 +53,65 @@ remove_talkclient: yes
 remove_telnetclient: yes
 remove_LDAPclient: yes
 remove_RPC: yes
+
+# Section 3 Settings
+disable_wifi: False
+IPv6_is_enabled: Yes
+enable_firewall: yes
+list_of_ports_to_allow:
+  - { rule: "allow", port: "8080", proto: "tcp" }
+
+# Section 4 Settings
+## Ensure rsyslog is configured to send logs to a remote log host
+remoteSyslog:
+  enable: false
+  host: 192.168.2.100
+  port: 514
+  protocol: tcp
+logrotate_policy: "daily"
+## auditd config
+architecture: "x86_64"
+admin_space_left_action: halt
+max_log_file_action: keep_logs
+max_log_file: 10
+backlog_limit: "8192"
+space_left_action: email
+action_mail_acct: root
+grub_backlog_limit: 8192
+
+#Section 5
+## 5.1.8 Ensure cron is restricted to authorized users
+allowd_hosts: "ALL: 0.0.0.0/0.0.0.0, 192.168.2.0/255.255.255.0"
+## 5.2.13 Ensure only strong MAC algorithms are used
+ssh_MACs: "hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512,hmac-sha2-256"
+## 5.2.14 Ensure only strong Key Exchange algorithms are used
+ssh_key_algorithms: "curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-group14-sha256,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,ecdh-sha2-nistp521,ecdh-sha2-nistp384,ecdh-sha2-nistp256,diffie-hellman-group-exchange-sha256"
+## 5.2.17 Ensure SSH access is limited
+allowed_users: ali saleh baker root #Put None or list of users space between each user
+allowed_groups: None
+deny_users: None
+deny_groups: None
+## 5.2.21 Ensure SSH MaxStartups is configured
+ssh_max_startups: "10:30:100"
+## 5.2.22 Ensure SSH MaxSessions is limited
+ssh_max_sessions: 10
+## 5.4.1.1 Ensure password expiration is 365 days or less
+pass_expire_in_days: 300
+pass_warn_age: 7
+pass_min_days: 1
+## 5.4.1.1 Ensure password expiration is 365 days or less
+list_of_os_users:
+  - ali
+## 5.4.1.4 Ensure inactive password lock is 30 days or less
+##Note: A value of -1 would disable this setting
+account_inactive: 30
+## 5.4.5 Ensure default user shell timeout is 900 seconds or less
+shell_timeout_sec: 900
+
+# Section 6
+withoutOwnerFileDirOwner: root
+withoutGroupFilesDirGroup: root
+outputfiles: /home/ali/ #Output dir of some command
+disable_autofs: true
+disable_usb: true
+install_apparmor: true
