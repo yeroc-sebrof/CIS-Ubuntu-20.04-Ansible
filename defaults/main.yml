@@ -14,6 +14,9 @@ temp_dir_size: 1G
 set_bootloader_credentials: no
 ### Update the default bootloader user and password
 bootloader_credentials: { user: "root", password: "b00tl04derPwd" }
+# 1.5.3 Ensure authentication required for single user mode
+set_root_password: yes
+root_password: r00tP4ssw0rd
 
 # Section 2 Settings
 time_synchronization_package_name: ntp
