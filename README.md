@@ -138,6 +138,7 @@ ansible-playbook -i host run.yaml -t section2 -t 6.1.1
 * Note:
 When run an individual task be sure from the dependencies between tasks, for example, if you run tag **4.1.1.2 Ensure auditd service is enabled** before running **4.1.1.1 Ensure auditd is installed** you will get an error at the run time.
 
+Points with ~~Tilda~~ not implemented yet, currently I'm working on it.
 
 
 
@@ -165,26 +166,26 @@ _________________
   - 1.1.7 Ensure nodev option set on /dev/shm partition (Automated)
   - 1.1.8 Ensure nosuid option set on /dev/shm partition (Automated)
   - 1.1.9 Ensure noexec option set on /dev/shm partition (Automated)
-  - 1.1.10 Ensure separate partition exists for /var (Automated)
-  - 1.1.11 Ensure separate partition exists for /var/tmp (Automated)
-  - 1.1.12 Ensure nodev option set on /var/tmp partition (Automated)
-  - 1.1.13 Ensure nosuid option set on /var/tmp partition (Automated)
-  - 1.1.14 Ensure noexec option set on /var/tmp partition (Automated)
-  - 1.1.15 Ensure separate partition exists for /var/log (Automated)
-  - 1.1.16 Ensure separate partition exists for /var/log/audit - (Automated)
-  - 1.1.17 Ensure separate partition exists for /home (Automated)
-  - 1.1.18 Ensure nodev option set on /home partition (Automated)
-  - 1.1.19 Ensure nodev option set on removable media partitions (Manual)
-  - 1.1.20 Ensure nosuid option set on removable media partitions - (Manual)
-  - 1.1.21 Ensure noexec option set on removable media partitions - (Manual)
+  - ~~1.1.10 Ensure separate partition exists for /var (Automated)~~
+  - ~~1.1.11 Ensure separate partition exists for /var/tmp (Automated)~~
+  - ~~1.1.12 Ensure nodev option set on /var/tmp partition (Automated)~~
+  - ~~1.1.13 Ensure nosuid option set on /var/tmp partition (Automated)~~
+  - ~~1.1.14 Ensure noexec option set on /var/tmp partition (Automated)~~
+  - ~~1.1.15 Ensure separate partition exists for /var/log (Automated)~~
+  - ~~1.1.16 Ensure separate partition exists for /var/log/audit - (Automated)~~
+  - ~~1.1.17 Ensure separate partition exists for /home (Automated)~~
+  - ~~1.1.18 Ensure nodev option set on /home partition (Automated)~~
+  - ~~1.1.19 Ensure nodev option set on removable media partitions (Manual)~~
+  - ~~1.1.20 Ensure nosuid option set on removable media partitions - (Manual)~~
+  - ~~1.1.21 Ensure noexec option set on removable media partitions - (Manual)~~
   - 1.1.22 Ensure sticky bit is set on all world-writable directories - (Automated)
   - 1.1.23 Disable Automounting (Automated)
   - 1.1.24 Disable USB Storage (Automated)
 
 **1.2 Configure Software Updates**
 
-  - 1.2.1 Ensure package manager repositories are configured (Manual)
-  - 1.2.2 Ensure GPG keys are configured (Manual)
+  - ~~1.2.1 Ensure package manager repositories are configured (Manual)~~
+  - ~~1.2.2 Ensure GPG keys are configured (Manual)~~
 
 **1.3 Configure sudo**
 
@@ -199,9 +200,9 @@ _________________
 
 **1.5 Secure Boot Settings**
 
-  - 1.5.1 Ensure bootloader password is set (Automated)
+  - ~~1.5.1 Ensure bootloader password is set (Automated)~~
   - 1.5.2 Ensure permissions on bootloader config are configured - (Automated)
-  - 1.5.3 Ensure authentication required for single user mode (Automated)
+  - ~~1.5.3 Ensure authentication required for single user mode (Automated)~~
 
 **1.6 Additional Process Hardening**
   - 1.6.1 Ensure XD/NX support is enabled (Automated)
@@ -234,8 +235,8 @@ _________________
   - 2.2 Special Purpose Services
   - 2.2.1 Time Synchronization
   - 2.2.1.1 Ensure time synchronization is in use (Automated)
-  - 2.2.1.2 Ensure systemd-timesyncd is configured (Manual)
-  - 2.2.1.3 Ensure chrony is configured (Automated)
+  - ~~2.2.1.2 Ensure systemd-timesyncd is configured (Manual)~~
+  - ~~2.2.1.3 Ensure chrony is configured (Automated)~~
   - 2.2.1.4 Ensure ntp is configured (Automated)
   - 2.2.2 Ensure X Window System is not installed (Automated)
   - 2.2.3 Ensure Avahi Server is not installed (Automated)
@@ -261,7 +262,7 @@ _________________
   - 2.3.4 Ensure telnet client is not installed (Automated)
   - 2.3.5 Ensure LDAP client is not installed (Automated)
   - 2.3.6 Ensure RPC is not installed (Automated)
-  - 2.4 Ensure nonessential services are removed or masked (Manual)
+  - ~~2.4 Ensure nonessential services are removed or masked (Manual)~~
 
 **3 Network Configuration**
   - 3.1 Disable unused network protocols and devices
@@ -298,29 +299,29 @@ _________________
   - 3.5.1.5 Ensure outbound connections are configured (Manual)
   - 3.5.1.6 Ensure firewall rules exist for all open ports (Manual)
   - 3.5.1.7 Ensure default deny firewall policy (Automated)
-  <!-- - 3.5.2 Configure nftables
-  - 3.5.2.1 Ensure nftables is installed (Automated)
-  - 3.5.2.2 Ensure Uncomplicated Firewall is not installed or disabled - (Automated)
-  - 3.5.2.3 Ensure iptables are flushed (Manual)
-  - 3.5.2.4 Ensure a table exists (Automated)
-  - 3.5.2.5 Ensure base chains exist (Automated)
-  - 3.5.2.6 Ensure loopback traffic is configured (Automated)
-  - 3.5.2.7 Ensure outbound and established connections are configured - (Manual)243
-  - 3.5.2.8 Ensure default deny firewall policy (Automated)
-  - 3.5.2.9 Ensure nftables service is enabled (Automated)
-  - 3.5.2.10 Ensure nftables rules are permanent (Automated)
-  - 3.5.3 Configure iptables
-  - 3.5.3.1.1 Ensure iptables packages are installed (Automated)
-  - 3.5.3.1.2 Ensure nftables is not installed (Automated)
-  - 3.5.3.1.3 Ensure Uncomplicated Firewall is not installed or disabled - (Automated)
-  - 3.5.3.2.1 Ensure default deny firewall policy (Automated)
-  - 3.5.3.2.2 Ensure loopback traffic is configured (Automated)
-  - 3.5.3.2.3 Ensure outbound and established connections are configured - (Manual)
-  - 3.5.3.2.4 Ensure firewall rules exist for all open ports (Automated)
-  - 3.5.3.3.1 Ensure IPv6 default deny firewall policy (Automated)
-  - 3.5.3.3.2 Ensure IPv6 loopback traffic is configured (Automated)
-  - 3.5.3.3.3 Ensure IPv6 outbound and established connections are - configured (Manual)
-  - 3.5.3.3.4 Ensure IPv6 firewall rules exist for all open ports - (Manual) -->
+  - ~~3.5.2 Configure nftables~~
+  - ~~3.5.2.1 Ensure nftables is installed (Automated)~~
+  - ~~3.5.2.2 Ensure Uncomplicated Firewall is not installed or disabled - (Automated)~~
+  - ~~3.5.2.3 Ensure iptables are flushed (Manual)~~
+  - ~~3.5.2.4 Ensure a table exists (Automated)~~
+  - ~~3.5.2.5 Ensure base chains exist (Automated)~~
+  - ~~3.5.2.6 Ensure loopback traffic is configured (Automated)~~
+  - ~~3.5.2.7 Ensure outbound and established connections are configured - (Manual)243~~
+  - ~~3.5.2.8 Ensure default deny firewall policy (Automated)~~
+  - ~~3.5.2.9 Ensure nftables service is enabled (Automated)~~
+  - ~~3.5.2.10 Ensure nftables rules are permanent (Automated)~~
+  - ~~3.5.3 Configure iptables~~
+  - ~~3.5.3.1.1 Ensure iptables packages are installed (Automated)~~
+  - ~~3.5.3.1.2 Ensure nftables is not installed (Automated)~~
+  - ~~3.5.3.1.3 Ensure Uncomplicated Firewall is not installed or disabled - (Automated)~~
+  - ~~3.5.3.2.1 Ensure default deny firewall policy (Automated)~~
+  - ~~3.5.3.2.2 Ensure loopback traffic is configured (Automated)~~
+  - ~~3.5.3.2.3 Ensure outbound and established connections are configured - (Manual)~~
+  - ~~3.5.3.2.4 Ensure firewall rules exist for all open ports (Automated)~~
+  - ~~3.5.3.3.1 Ensure IPv6 default deny firewall policy (Automated)~~
+  - ~~3.5.3.3.2 Ensure IPv6 loopback traffic is configured (Automated)~~
+  - ~~3.5.3.3.3 Ensure IPv6 outbound and established connections are - configured (Manual)~~
+  - ~~3.5.3.3.4 Ensure IPv6 firewall rules exist for all open ports - (Manual)~~
 
 **4 Logging and Auditing**
   - 4.1 Configure System Accounting (auditd)
@@ -423,7 +424,7 @@ _________________
 
 **6 System Maintenance**
   - 6.1 System File Permissions
-  - 6.1.1 Audit system file permissions (Manual)
+  - ~~6.1.1 Audit system file permissions (Manual)~~
   - 6.1.2 Ensure permissions on /etc/passwd are configured (Automated)
   - 6.1.3 Ensure permissions on /etc/gshadow- are configured Automated)
   - 6.1.4 Ensure permissions on /etc/shadow are configured (Automated)
@@ -435,27 +436,27 @@ _________________
   - 6.1.10 Ensure no world writable files exist (Automated)
   - 6.1.11 Ensure no unowned files or directories exist (Automated)
   - 6.1.12 Ensure no ungrouped files or directories exist (Automated)
-  - 6.1.13 Audit SUID executables (Manual)
-  - 6.1.14 Audit SGID executables (Manual)
+  - ~~6.1.13 Audit SUID executables (Manual)~~
+  - ~~6.1.14 Audit SGID executables (Manual)~~
 
 **6.2 User and Group Settings**
   - 6.2.1 Ensure password fields are not empty (Automated)
-  - 6.2.2 Ensure root is the only UID 0 account (Automated)
-  - 6.2.3 Ensure root PATH Integrity (Automated)
+  - ~~6.2.2 Ensure root is the only UID 0 account (Automated)~~
+  - ~~6.2.3 Ensure root PATH Integrity (Automated)~~
   - 6.2.4 Ensure all users' home directories exist (Automated)
   - 6.2.5 Ensure users' home directories permissions are 750 or more - restrictive (Automated)
   - 6.2.6 Ensure users own their home directories (Automated)
   - 6.2.7 Ensure users' dot files are not group or world writable - (Automated)
-  - 6.2.8 Ensure no users have .forward files (Automated)
-  - 6.2.9 Ensure no users have .netrc files (Automated)
-  - 6.2.10 Ensure users' .netrc Files are not group or world accessible - (Automated)
-  - 6.2.11 Ensure no users have .rhosts files (Automated)
-  - 6.2.12 Ensure all groups in /etc/passwd exist in /etc/group - (Automated)
-  - 6.2.13 Ensure no duplicate UIDs exist (Automated)
-  - 6.2.14 Ensure no duplicate GIDs exist (Automated)
-  - 6.2.15 Ensure no duplicate user names exist (Automated)
-  - 6.2.16 Ensure no duplicate group names exist (Automated)
-  - 6.2.17 Ensure shadow group is empty (Automated)
+  - ~~6.2.8 Ensure no users have .forward files (Automated)~~
+  - ~~6.2.9 Ensure no users have .netrc files (Automated)~~
+  - ~~6.2.10 Ensure users' .netrc Files are not group or world accessible - (Automated)~~
+  - ~~6.2.11 Ensure no users have .rhosts files (Automated)~~
+  - ~~6.2.12 Ensure all groups in /etc/passwd exist in /etc/group - (Automated)~~
+  - ~~6.2.13 Ensure no duplicate UIDs exist (Automated)~~
+  - ~~6.2.14 Ensure no duplicate GIDs exist (Automated)~~
+  - ~~6.2.15 Ensure no duplicate user names exist (Automated)~~
+  - ~~6.2.16 Ensure no duplicate group names exist (Automated)~~
+  - ~~6.2.17 Ensure shadow group is empty (Automated)~~
 
 _________________
 
