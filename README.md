@@ -138,10 +138,14 @@ ansible-playbook -i host run.yaml -t section2 -t 6.1.1
 * Note:
 When run an individual task be sure from the dependencies between tasks, for example, if you run tag **4.1.1.2 Ensure auditd service is enabled** before running **4.1.1.1 Ensure auditd is installed** you will get an error at the run time.
 
-Points with ~~Tilda~~ not implemented yet, currently I'm working on it.
+* Points with ~~Tilda~~ not implemented yet, currently I'm working on it.
+* make sure to select one time service, for me I use ntp, but you can use other service such as [`systemd-timesyncd`,`ntp`,`chrony`] under the settings `defaults/main.yaml`
+> Testing
+> 11/1/2020 Tested on AWS EC2 ubuntu 20.04 LTS [Pass]
+> 11/1/2020 Tested on local Ubuntu 20.04 LTS server [Pass]
 
-
-
+* Before run make sure to update user list under `defaults/main.yaml` on `list_of_os_users` + `allowed_users`
+* `Make` sure to set the right subnet under `defaults/main.yaml` on `allowd_hosts`
 
 _________________
 
@@ -200,9 +204,9 @@ _________________
 
 **1.5 Secure Boot Settings**
 
-  - ~~1.5.1 Ensure bootloader password is set (Automated)~~
+  - 1.5.1 Ensure bootloader password is set (Automated)
   - 1.5.2 Ensure permissions on bootloader config are configured - (Automated)
-  - ~~1.5.3 Ensure authentication required for single user mode (Automated)~~
+  - 1.5.3 Ensure authentication required for single user mode (Automated)
 
 **1.6 Additional Process Hardening**
   - 1.6.1 Ensure XD/NX support is enabled (Automated)
@@ -235,8 +239,8 @@ _________________
   - 2.2 Special Purpose Services
   - 2.2.1 Time Synchronization
   - 2.2.1.1 Ensure time synchronization is in use (Automated)
-  - ~~2.2.1.2 Ensure systemd-timesyncd is configured (Manual)~~
-  - ~~2.2.1.3 Ensure chrony is configured (Automated)~~
+  - 2.2.1.2 Ensure systemd-timesyncd is configured (Manual)
+  - 2.2.1.3 Ensure chrony is configured (Automated)
   - 2.2.1.4 Ensure ntp is configured (Automated)
   - 2.2.2 Ensure X Window System is not installed (Automated)
   - 2.2.3 Ensure Avahi Server is not installed (Automated)
