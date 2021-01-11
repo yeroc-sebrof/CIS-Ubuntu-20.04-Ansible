@@ -21,7 +21,7 @@ root_password: r00tP4ssw0rd
 # Section 2 Settings
 
 #Setting for systemd-timesyncd
-enable_systemdtimesyncd: yes #If you enable this make sure to disable NTP below, only one time service must be run in the server
+enable_systemdtimesyncd: no #If you enable this make sure to disable NTP below, only one time service must be run in the server
 timesync_timezone: Etc/UTC
 timesync_fallback_ntp_hosts:
   - 0.pool.ntp.org
@@ -30,7 +30,7 @@ timesync_fallback_ntp_hosts:
   - 3.pool.ntp.org
 
 #Setting for NTP
-enableNTP: no
+enableNTP: yes
 time_synchronization_package_name: ntp
 time_synchronization_servers:
   - uri: "time1.google.com"
@@ -43,7 +43,7 @@ time_synchronization_servers:
     config: "iburst"
 
 # Setting for chrony
-chronyEnable: yes
+chronyEnable: no
 chrony_driftfile: /var/lib/chrony/chrony.drift
 chronyservers_preferred: []
 chronyservers:
