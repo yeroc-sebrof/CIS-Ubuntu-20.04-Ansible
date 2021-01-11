@@ -58,6 +58,8 @@
         name: "ntp"
         state: started
         enabled: true
+  when: "{{enableNTP}}"
+
   tags:
     - section2
     - level_1_server
@@ -72,8 +74,28 @@
 # This recommendation only applies if timesyncd is in use on the system
 # Only one time synchronization method should be in use on the system
 - name: 2.2.1.2 Ensure systemd-timesyncd is configured
-  debug:
-    msg: Skip this, since we are using ntp
+  block:
+    - name: 2.2.1.2 Ensure systemd-timesyncd is configured | install systemd-timesyncd
+      apt:
+         name: systemd-timesyncd
+         state: present
+    - name: 2.2.1.2 Ensure systemd-timesyncd is configured | set timezone
+      timezone:
+        name: "{{ timesync_timezone }}"
+    - name: 2.2.1.2 Ensure systemd-timesyncd is configured | Configure systemd-timesyncd
+      template:
+        src:  files/templates/timesyncd.conf.j2
+        dest: /etc/systemd/timesyncd.conf
+        mode: 0644
+        owner: root
+        group: root
+      notify: reloadTimesyncd
+    - name: 2.2.1.2 Ensure systemd-timesyncd is configured | Start and enable systemd-timesyncd
+      service:
+        name: systemd-timesyncd.service
+        enabled: yes
+        state: started
+  when: "{{enable_systemdtimesyncd}} == True"
   tags:
     - section2
     - level_1_server
@@ -81,8 +103,25 @@
     - 2.2.1.2
 # 2.2.1.3 Ensure chrony is configured
 - name: 2.2.1.3 Ensure chrony is configured
-  debug:
-    msg: Skip this, since we are using ntp
+  block:
+    - name: 2.2.1.3 Ensure chrony is configured | Install Chrony
+      apt:
+        name: "chrony"
+        state: present
+    - name: 2.2.1.3 Ensure chrony is configured | Start Chrony service
+      service:
+        name: "chrony"
+        state: started
+        enabled: yes
+    - name: 2.2.1.3 Ensure chrony is configured | Generate configuration
+      template:
+        src: files/templates/chrony.conf.j2
+        dest: "/etc/chrony/chrony.conf"
+        owner: root
+        group: root
+        mode: 0644
+      notify: RestartChronyservice
+  when: "{{chronyEnable}} == True"
   tags:
     - section2
     - level_1_server
@@ -452,9 +491,18 @@
     msg: >
       Run the following command:
       $ lsof -i -P -n | grep -v "(ESTABLISHED)"
-      Review the output to ensure that all services listed are required on the system. If a listed
-      service is not required, remove the package containing the service. If the package
-      containing a non-essential service is required, stop and mask the non-essential service.
+        Review the output to ensure that all services listed are required on the system. If a listed
+        service is not required, remove the package containing the service. If the package
+        containing a non-essential service is required, stop and mask the non-essential service.
+        Code Meaning 
+        S File size differs. 
+        M File mode differs (includes permissions and file type). 
+        5 The MD5 checksum differs. 
+        D The major and minor version numbers differ on a device file. 
+        L A mismatch occurs in a link. 
+        U The file ownership differs. 
+        G The file group owner differs. 
+        T The file time (mtime) differs.
   tags:
     - section2
     - level_1_server
