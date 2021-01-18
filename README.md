@@ -455,12 +455,24 @@ _________________
   - ~~6.2.9 Ensure no users have .netrc files (Automated)~~
   - ~~6.2.10 Ensure users' .netrc Files are not group or world accessible - (Automated)~~
   - ~~6.2.11 Ensure no users have .rhosts files (Automated)~~
-  - ~~6.2.12 Ensure all groups in /etc/passwd exist in /etc/group - (Automated)~~
+  - ~~6.2.12 Ensure aFor ll groups in /etc/passwd exist in /etc/group - (Automated)~~
   - ~~6.2.13 Ensure no duplicate UIDs exist (Automated)~~
   - ~~6.2.14 Ensure no duplicate GIDs exist (Automated)~~
   - ~~6.2.15 Ensure no duplicate user names exist (Automated)~~
   - ~~6.2.16 Ensure no duplicate group names exist (Automated)~~
   - ~~6.2.17 Ensure shadow group is empty (Automated)~~
+
+_________________
+## Troubleshooting
+* If you want to run the playbook in the same machine, make sure to add this to run task:
+```
+- hosts: 127.0.0.1
+  connection: local
+```
+* if you faced issue with execut, try to run the playbook in another path, like `/srv/`.
+* For error like this `stderr: chage: user 'ubuntu' does not exist in /etc/passed`, make sure to update config under `CIS-Ubuntu-20.04-Ansible/defaults/main.yml`
+
+
 
 _________________
 
