@@ -758,11 +758,23 @@
 # 5.6 Ensure access to the su command is restricted
 # Restricting the use of su , and using sudo in its place, provides system administrators better control of the escalation of user privileges to execute privileged commands. The sudo utility also provides a better logging and audit mechanism, as it can log each command executed via sudo , whereas su can only record that a user executed the su program.
 - name: 5.6 Ensure access to the su command is restricted
-  user:
-    name: "root"
-    groups: ["sudo"]
+  block:
+    - name: 5.6 Ensure access to the su command is restricted  | create su-group-access
+      template:
+        src: files/templates/etc/su-group-access.j2
+        dest: "/etc/security/su-group-access"
+        owner: root
+        group: root
+        mode: 0644
+    - name: 5.6 Ensure access to the su command is restricted  | create su-group-access
+      template:
+        src: files/templates/etc/pam-d-su.j2
+        dest: "/etc/pam.d/su"
+        owner: root
+        group: root
+        mode: 0644
   tags:
     - section5
     - level_1_server
     - level_1_workstation
-    - _5.6
+    - "5.6"
