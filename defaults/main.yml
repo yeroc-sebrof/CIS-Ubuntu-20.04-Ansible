@@ -134,11 +134,9 @@ account_inactive: 30
 shell_timeout_sec: 900
 
 # Section 5 PAM config
-usersAllowedToAccess:
+usersAllowedToSuAccess:
   - root
-  - ubuntu
 adminGroup: root
-
 # Section 6
 withoutOwnerFileDirOwner: root
 withoutGroupFilesDirGroup: root
