@@ -824,6 +824,7 @@
         dest: /etc/default/grub
         regexp: '^(GRUB_CMDLINE_LINUX=(?!.*apparmor)\"[^\"]*)(\".*)'
         replace: '\1 apparmor=1 security=apparmor\2'
+        follow: true
       register: output_1_7_1_2
     - name: 1.7.1.2 Ensure AppArmor is enabled in the bootloader configuration | reload
       shell: |
@@ -867,14 +868,21 @@
 # developing software for a particular OS platform. If mingetty(8) supports the following
 # options, they display operating system information: \m - machine architecture \r -
 # operating system release \s - operating system name \v - operating system version
+
+# We allow overwriting the default motd message (contained in files/templates/motd.j2) by a custom template, whose path
+# has to be defined in the variable "custom_motd_file_path".
 - name: 1.8.1.1 Ensure message of the day is configured properly
     1.8.1.4 Ensure permissions on /etc/motd are configured"
   template:
-    src: files/templates/motd.j2
+    src: "{{ lookup('first_found', motd, errors='ignore') }}"
     dest: /etc/motd
     owner: root
     group: root
     mode: "u-x,go-wx"
+  vars:
+    - motd:
+      - "{{ custom_motd_file_path }}"
+      - "files/templates/motd.j2"
   tags:
     - section1
     - level_1_server
