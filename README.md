@@ -473,6 +473,15 @@ _________________
 * For error like this `stderr: chage: user 'ubuntu' does not exist in /etc/passed`, make sure to update config under `CIS-Ubuntu-20.04-Ansible/defaults/main.yml`
 
 
+```Bash
+TASK [CIS-Ubuntu-20.04-Ansible : 1.4.1 Ensure AIDE is installed] ***********************************************************************************************************************************************************************************************************fatal: [192.168.80.129]: FAILED! => {"cache_update_time": 1611229159, "cache_updated": false, "changed": false, "msg": "'/usr/bin/apt-get -y -o \"Dpkg::Options::=--force-confdef\" -o \"Dpkg::Options::=--force-confold\"      install 'nullmailer' 'aide-common' 'aide' -o APT::Install-Recommends=no' failed: E: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 5194 (unattended-upgr)\nE: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?\n", "rc": 100, "stderr": "E: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 5194 (unattended-upgr)\nE: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?\n", "stderr_lines": ["E: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 5194 (unattended-upgr)", "E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?"], "stdout": "", "stdout_lines": []}
+```
+* For the above error you need to make sure there is not apt process running in the background, or you must wait until apt finish the process.
+
+```Bash
+TASK [CIS-Ubuntu-20.04-Ansible : 5.4.1.1 Ensure password expiration is 365 days or less | chage] ***************************************************************************************************************************************************************************failed: [192.168.80.129] (item=ubuntu) => {"ansible_loop_var": "item", "changed": true, "cmd": ["chage", "--maxdays", "300", "ubuntu"], "delta": "0:00:00.005478", "end": "2021-01-21 12:49:45.463615", "item": "ubuntu", "msg": "non-zero return code", "rc": 1, "start": "2021-01-21 12:49:45.458137", "stderr": "chage: user 'ubuntu' does not exist in /etc/passwd", "stderr_lines": ["chage: user 'ubuntu' does not exist in /etc/passwd"], "stdout": "", "stdout_lines": []}
+```
+* Make sure you set the right user under defaults/main.yaml
 
 _________________
 
