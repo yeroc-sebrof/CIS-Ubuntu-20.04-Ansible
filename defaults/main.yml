@@ -1,7 +1,7 @@
 ---
 # Defaults file for Auto-CIS-Ubuntu-Linux-20.04-LTS-Remediation
 
-# Section 1
+# Section 1 settings
 disable_cramfs: yes
 disable_freevxfs: yes
 disable_jffs2: yes
@@ -17,10 +17,12 @@ bootloader_credentials: { user: "root", password: "b00tl04derPwd" }
 # 1.5.3 Ensure authentication required for single user mode
 set_root_password: yes
 root_password: r00tP4ssw0rd
+## 1.8.1.4 Ensure permissions on /etc/motd are configured: allow for custom motd template (if the file doesn't exist, the
+## default template in files/templates/motd.j2 will be used)
+custom_motd_file_path: "{{ inventory_dir }}/custom_templates/motd_custom.txt"
 
 # Section 2 Settings
-
-#Setting for systemd-timesyncd
+##Setting for systemd-timesyncd
 enable_systemdtimesyncd: no #If you enable this make sure to disable NTP below, only one time service must be run in the server
 timesync_timezone: Etc/UTC
 timesync_fallback_ntp_hosts:
@@ -29,7 +31,7 @@ timesync_fallback_ntp_hosts:
   - 2.pool.ntp.org
   - 3.pool.ntp.org
 
-#Setting for NTP
+## Settings for NTP
 enableNTP: yes
 time_synchronization_package_name: ntp
 time_synchronization_servers:
@@ -42,7 +44,7 @@ time_synchronization_servers:
   - uri: "time4.google.com"
     config: "iburst"
 
-# Setting for chrony
+## Settings for chrony
 chronyEnable: no
 chrony_driftfile: /var/lib/chrony/chrony.drift
 chronyservers_preferred: []
@@ -79,12 +81,14 @@ remove_telnetclient: yes
 remove_LDAPclient: yes
 remove_RPC: yes
 
+
 # Section 3 Settings
 disable_wifi: False
 IPv6_is_enabled: Yes
 enable_firewall: yes
 list_of_ports_to_allow:
   - { rule: "allow", port: "8080", proto: "tcp" }
+
 
 # Section 4 Settings
 ## Ensure rsyslog is configured to send logs to a remote log host
@@ -104,7 +108,8 @@ space_left_action: email
 action_mail_acct: root
 grub_backlog_limit: 8192
 
-#Section 5
+
+# Section 5 settings
 ## 5.1.8 Ensure cron is restricted to authorized users
 allowd_hosts: "ALL: 0.0.0.0/0.0.0.0, 192.168.2.0/255.255.255.0"
 ## 5.2.13 Ensure only strong MAC algorithms are used
@@ -138,11 +143,13 @@ usersAllowedToSuAccess:
   - root
 adminGroup: root
 # Section 6
+
+# Section 6 settings
 withoutOwnerFileDirOwner: root
 withoutGroupFilesDirGroup: root
 outputfiles: /root/ #Output dir of some command
 disable_autofs: true
 disable_usb: true
 install_apparmor: true
-# 6.2.7 Ensure users' dot files are not group or world accessible
+## 6.2.7 Ensure users' dot files are not group or world accessible
 fix_dot_file_permissions: yes
