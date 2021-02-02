@@ -346,12 +346,12 @@
       with_items:
         - { name: net.ipv6.conf.all.accept_ra, value: 0 }
         - { name: net.ipv6.conf.default.accept_ra, value: 0 }
-      when: IPv6_is_enabled
     - name: 3.3.9 Ensure IPv6 router advertisements are not accepted | load
       shell: |
         sysctl -w net.ipv6.conf.all.accept_ra=0
         sysctl -w net.ipv6.conf.default.accept_ra=0
         sysctl -w net.ipv6.route.flush=1
+  when: IPv6_is_enabled
   tags:
     - section3
     - level_1_server
