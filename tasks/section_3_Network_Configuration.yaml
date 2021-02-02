@@ -593,16 +593,11 @@
         ufw default deny incoming
         ufw default allow outgoing
         ufw default deny routed
+    - name: Enable UFW
+      ufw:
+        state: enabled
+        policy: allow
   when: enable_firewall
-  tags:
-    - section3
-    - level_1_server
-    - level_1_workstation
-    - 3.5.1.7
-- name: Enable UFW
-  ufw:
-    state: enabled
-    policy: allow
   tags:
     - section3
     - level_1_server
