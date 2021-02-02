@@ -593,6 +593,7 @@
     - name: 5.4.1.1 Ensure password expiration is 365 days or less | chage --warndays
       command: "chage --warndays {{ pass_warn_age }} {{ item }}"
       with_items: "{{ list_of_os_users }}"
+  ignore_errors: yes
   tags:
     - section5
     - level_1_server
