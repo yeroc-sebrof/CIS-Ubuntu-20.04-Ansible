@@ -593,7 +593,6 @@
     - name: Enable UFW
       ufw:
         state: enabled
-        policy: allow
   when: enable_firewall
   tags:
     - section3
