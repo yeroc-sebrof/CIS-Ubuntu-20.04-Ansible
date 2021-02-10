@@ -586,15 +586,10 @@
   block:
     - name: 3.5.1.7 Ensure default deny firewall policy
       shell: |
-        ufw allow git
-        ufw allow in http
-        ufw allow in https
-        ufw logging on
-    - name: 3.5.1.7 Ensure default deny firewall policy
-      shell: |
         ufw default deny incoming
         ufw default allow outgoing
         ufw default deny routed
+        ufw logging on
     - name: Enable UFW
       ufw:
         state: enabled
