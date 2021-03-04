@@ -149,8 +149,7 @@
   when: disable_udf
   tags:
     - section1
-    - level_1_server
-    - level_1_workstation
+    - level_1_server    - level_1_workstation
     - 1.1.1.6
     - filesystems
     - udf
@@ -551,6 +550,17 @@
         name: ["nullmailer", "aide-common", "aide"]
         state: present
         install_recommends: false
+    - name: Configure default AIDE excludes file
+      copy:
+        src: "files/1.4.1.txt"
+        dest: "/etc/aide/aide.conf.d/00_local_excludes"
+    - name: Add extra AIDE exclude paths
+      lineinfile:
+        line: "{{ item }}"
+        path: "/etc/aide/aide.conf.d/00_local_excludes"
+        state: present
+      loop: "{{ aide_exclude_paths }}"
+      when: (aide_exclude_paths is defined) and (aide_exclude_paths| length > 0)
     - name: Configure AIDE as appropriate for your environment | aideinit
       command: aideinit
     - name: Configure AIDE as appropriate for your environment | aideinit db
