@@ -562,7 +562,7 @@
       loop: "{{ aide_exclude_paths }}"
       when: (aide_exclude_paths is defined) and (aide_exclude_paths| length > 0)
     - name: Configure AIDE as appropriate for your environment | aideinit
-      command: aideinit
+      command: aideinit --yes --force
     - name: Configure AIDE as appropriate for your environment | aideinit db
       shell: |
         mv /var/lib/aide/aide.db.new /var/lib/aide/aide.db
