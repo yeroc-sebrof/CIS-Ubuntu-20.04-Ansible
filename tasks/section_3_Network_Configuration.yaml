@@ -549,14 +549,14 @@
 # Changing firewall settings while connected over network can result in being locked out of the system
 # The remediation command opens up the port to traffic from all sources. Consult ufw
 # documentation and set any restrictions in compliance with site policy
-- name: 3.5.1.6 Ensure firewall rules exist for all open ports"
+- name: 3.5.1.6 Ensure firewall rules exist for all open ports
   block:
-    - name: 3.5.1.6 Ensure firewall rules exist for all open ports | ssh"
+    - name: 3.5.1.6 Ensure firewall rules exist for all open ports | ssh
       ufw:
         rule: allow
         proto: tcp
         port: "22"
-    - name: 3.5.1.6 Ensure firewall rules exist for all open ports | dns"
+    - name: 3.5.1.6 Ensure firewall rules exist for all open ports | dns
       ufw:
         rule: allow
         proto: "{{ item }}"
@@ -564,12 +564,24 @@
       loop:
         - tcp
         - udp
-    - name:
+    - name: 3.5.1.6 Ensure firewall rules exist for all open ports | defined ports
       ufw:
         rule: "{{ item.rule }}"
         port: "{{ item.port }}"
         proto: "{{ item.proto }}"
-      with_items: "{{ list_of_ports_to_allow }}"
+      with_items: "{{ firewall_list_of_ports_to_allow }}"
+    - name: 3.5.1.6 Ensure firewall rules exist for all open ports | keep_alived (1)
+      ufw:
+        # note: Ansible doesn't support "proto: vrrp"
+        rule: allow
+        from_ip: 224.0.0.18
+      when: firewall_allow_keep_alive
+    - name: 3.5.1.6 Ensure firewall rules exist for all open ports | keep_alived (2)
+      ufw:
+        # note: Ansible doesn't support "proto: vrrp"
+        rule: allow
+        to_ip: 224.0.0.18
+      when: firewall_allow_keep_alive
   when: enable_firewall
   tags:
     - section3
