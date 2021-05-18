@@ -457,6 +457,7 @@
     - level_1_server
     - level_1_workstation
     - 1.2.1
+    - manual
 # 1.2.2 Ensure GPG keys are configured
 # Most packages managers implement GPG key signing to verify package integrity during installation.
 # It is important to ensure that updates are obtained from a valid source to protect against
