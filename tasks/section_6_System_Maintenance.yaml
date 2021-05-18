@@ -17,7 +17,7 @@
     - level_1_server
     - level_1_workstation
     - 6.1.1
-    - diy
+    - manual
 # 6.1.2 Ensure permissions on /etc/passwd are configured
 - name: 6.1.2 Ensure permissions on /etc/passwd are configured
   file:
@@ -197,7 +197,7 @@
     - level_1_server
     - level_1_workstation
     - 6.1.13
-    - diy
+    - manual
 # 6.1.14 Audit SGID executables
 - name: 6.1.14 Audit SGID executables
   block:
@@ -218,7 +218,7 @@
     - level_1_server
     - level_1_workstation
     - 6.1.14
-    - diy
+    - manual
 # 6.2 User and Group Settings
 # 6.2.1 Ensure password fields are not empty
 - name: 6.2.1 Ensure password fields are not empty
@@ -243,7 +243,7 @@
     - level_1_server
     - level_1_workstation
     - 6.2.1
-    - diy
+    - manual
 # 6.2.2 Ensure root is the only UID 0 account
 - name: 6.2.2 Ensure root is the only UID 0 account
   block:
@@ -266,7 +266,7 @@
     - level_1_server
     - level_1_workstation
     - 6.2.2
-    - diy
+    - manual
 # 6.2.3 Ensure root PATH Integrity
 - name: 6.2.3 Ensure root PATH Integrity
   block:
@@ -282,7 +282,7 @@
     - level_1_server
     - level_1_workstation
     - 6.2.3
-    - diy
+    - manual
 # 6.2.4 Ensure all users' home directories exist
 - name: 6.2.4 Ensure all users' home directories exist
   block:
@@ -381,7 +381,7 @@
     - level_1_server
     - level_1_workstation
     - 6.2.7
-    - diy
+    - manual
 # 6.2.8 Ensure no users have .forward files
 - name: 6.2.8 Ensure no users have .forward files
   block:
@@ -397,7 +397,7 @@
     - level_1_server
     - level_1_workstation
     - 6.2.8
-    - diy
+    - manual
 # 6.2.9 Ensure no users have .netrc files
 - name: 6.2.9 Ensure no users have .netrc files
   block:
@@ -413,7 +413,7 @@
     - level_1_server
     - level_1_workstation
     - 6.2.9
-    - diy
+    - manual
 # 6.2.10 Ensure users' .netrc Files are not group or world accessible
 - name: 6.2.10 Ensure users' .netrc Files are not group or world accessible
   block:
@@ -429,7 +429,7 @@
     - level_1_server
     - level_1_workstation
     - 6.2.10
-    - diy
+    - manual
 # 6.2.11 Ensure no users have .rhosts files
 - name: 6.2.11 Ensure no users have .rhosts files
   block:
@@ -445,7 +445,7 @@
     - level_1_server
     - level_1_workstation
     - 6.2.11
-    - diy
+    - manual
 # 6.2.12 Ensure all groups in /etc/passwd exist in /etc/group
 - name: 6.2.12 Ensure all groups in /etc/passwd exist in /etc/group
   block:
@@ -467,7 +467,7 @@
     - level_1_server
     - level_1_workstation
     - 6.2.12
-    - diy
+    - manual
 # 6.2.13 Ensure no duplicate UIDs exist
 - name: 6.2.13 Ensure no duplicate UIDs exist
   block:
@@ -491,7 +491,7 @@
     - level_1_server
     - level_1_workstation
     - 6.2.13
-    - diy
+    - manual
 # 6.2.14 Ensure no duplicate GIDs exist
 - name: 6.2.14 Ensure no duplicate GIDs exist
   block:
@@ -510,7 +510,7 @@
     - level_1_server
     - level_1_workstation
     - 6.2.14
-    - diy
+    - manual
 # 6.2.15 Ensure no duplicate user names exist
 - name: 6.2.15 Ensure no duplicate user names exist
   block:
@@ -529,7 +529,7 @@
     - level_1_server
     - level_1_workstation
     - 6.2.15
-    - diy
+    - manual
 # 6.2.16 Ensure no duplicate group names exist
 - name: 6.2.16 Ensure no duplicate group names exist
   block:
@@ -548,7 +548,7 @@
     - level_1_server
     - level_1_workstation
     - 6.2.16
-    - diy
+    - manual
 # 6.2.17 Ensure shadow group is empty
 - name: 6.2.17 Ensure shadow group is empty
   block:
@@ -566,4 +566,4 @@
     - level_1_server
     - level_1_workstation
     - 6.2.17
-    - diy
+    - manual
