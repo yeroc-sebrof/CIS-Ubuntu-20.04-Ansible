@@ -187,6 +187,12 @@
       copy:
         dest: "{{ outputfiles }}/6.1.13"
         content: "{{ output_6_1_13.stdout_lines }}"
+    - name: 6.1.13 Audit SUID executables | prompt user
+      debug:
+        msg: >
+          Please review the output of section 6.1.13 at {{ outputfiles }}/6.1.13
+      when:
+        - output_6_1_13.stdout
     # - name: 6.1.13 Audit SUID executables | fix
     #   file:
     #     path: "{{ item }}"
@@ -208,6 +214,12 @@
       copy:
         dest: "{{ outputfiles }}/6.1.14"
         content: "{{ output_6_1_14.stdout_lines }}"
+    - name: 6.1.14 Audit SGID executables | prompt user
+      debug:
+        msg: >
+          Please review the output of section 6.1.14 at {{ outputfiles }}/6.1.14
+      when:
+        - output_6_2_1.stdout
     # - name: 6.1.14 Audit SGID executables | fix
     #   file:
     #     path: "{{ item }}"
@@ -231,6 +243,12 @@
       copy:
         dest: "{{ outputfiles }}/6.2.1"
         content: "{{ output_6_2_1.stdout_lines }}"
+    - name: 6.2.1 Ensure password fields are not empty | prompt user
+      debug:
+        msg: >
+          Please review the output of section 6.2.1 at {{ outputfiles }}/6.2.1. The discovered accounts are locked
+      when:
+        - output_6_2_1.stdout
     - name: 6.2.1 Ensure password fields are not empty | Lock account
       user:
         name: "{{ item }}"
@@ -255,6 +273,12 @@
       copy:
         dest: "{{ outputfiles }}/6.2.2"
         content: "{{ output_6_2_2.stdout_lines }}"
+    - name: 6.2.2 Ensure root is the only UID 0 account | prompt user
+      debug:
+        msg: >
+          Please review the output of section 6.2.2 at {{ outputfiles }}/6.2.2
+      when:
+        - output_6_2_2.stdout_lines
     # - name: 6.2.2 Ensure root is the only UID 0 account | Lock account
     #   user:
     #     name: "{{ item }}"
@@ -277,6 +301,12 @@
       copy:
         dest: "{{ outputfiles }}/6.2.3"
         content: "{{ output_6_2_3 }}"
+    - name: 6.2.3 Ensure root PATH Integrity | prompt user
+      debug:
+        msg: >
+          Please review the output of section 6.2.3 at {{ outputfiles }}/6.2.3
+      when:
+        - output_6_2_3.stdout or output_6_2_3.stderr
   tags:
     - section6
     - level_1_server
@@ -376,6 +406,12 @@
       when:
         - fix_dot_file_permissions
         - output_6_2_7.stdout
+    - name: 6.2.7 Ensure users' dot files are not group or world writable | prompt user
+      debug:
+        msg: >
+          Please review the output of section 6.2.7 at {{ outputfiles }}/6.2.7
+      when:
+        - output_6_2_7.stdout
   tags:
     - section6
     - level_1_server
@@ -388,10 +424,16 @@
     - name: 6.2.8 Ensure no users have .forward files | list
       script: 6_2_8.sh
       register: output_6_2_8
-    - name: 6.2.8 Ensure no users have .forward files  | save output
+    - name: 6.2.8 Ensure no users have .forward files | save output
       copy:
         dest: "{{ outputfiles }}/6.2.8"
         content: "{{ output_6_2_8.stdout }}"
+    - name: 6.2.8 Ensure no users have .forward files | prompt user
+      debug:
+        msg: >
+          Please review the output of section 6.2.8 at {{ outputfiles }}/6.2.8
+      when:
+        - output_6_2_8.stdout
   tags:
     - section6
     - level_1_server
@@ -408,6 +450,12 @@
       copy:
         dest: "{{ outputfiles }}/6.2.9"
         content: "{{ output_6_2_9.stdout }}"
+    - name: 6.2.9 Ensure no users have .netrc files | prompt user
+      debug:
+        msg: >
+          Please review the output of section 6.2.9 at {{ outputfiles }}/6.2.9
+      when:
+        - output_6_2_9.stdout
   tags:
     - section6
     - level_1_server
@@ -424,6 +472,12 @@
       copy:
         dest: "{{ outputfiles }}/6.2.10"
         content: "{{ output_6_2_10.stdout }}"
+    - name: 6.2.10 Ensure users' .netrc Files are not group or world accessible | prompt user
+      debug:
+        msg: >
+          Please review the output of section 6.2.10 at {{ outputfiles }}/6.2.10
+      when:
+        - output_6_2_10.stdout
   tags:
     - section6
     - level_1_server
@@ -440,6 +494,12 @@
       copy:
         dest: "{{ outputfiles }}/6.2.11"
         content: "{{ output_6_2_11.stdout }}"
+    - name: 6.2.11 Ensure no users have .rhosts files | prompt user
+      debug:
+        msg: >
+          Please review the output of section 6.2.11 at {{ outputfiles }}/6.2.11
+      when:
+        - output_6_2_11.stdout
   tags:
     - section6
     - level_1_server
@@ -462,6 +522,12 @@
       copy:
         dest: "{{ outputfiles }}/6.2.12"
         content: "{{ output_6_2_12 }}"
+    - name: 6.2.12 Ensure all groups in /etc/passwd exist in /etc/group | prompt user
+      debug:
+        msg: >
+          Please review the output of section 6.2.12 at {{ outputfiles }}/6.2.12
+      when:
+        - output_6_2_12.stdout
   tags:
     - section6
     - level_1_server
@@ -486,6 +552,12 @@
       copy:
         dest: "{{ outputfiles }}/6.2.13"
         content: "{{ output_6_2_13 }}"
+    - name: 6.2.13 Ensure no duplicate UIDs exist | prompt user
+      debug:
+        msg: >
+          Please review the output of section 6.2.13 at {{ outputfiles }}/6.2.13
+      when:
+        - output_6_2_13.stdout
   tags:
     - section6
     - level_1_server
@@ -505,6 +577,12 @@
       copy:
         dest: "{{ outputfiles }}/6.2.14"
         content: "{{ output_6_2_14 }}"
+    - name: 6.2.14 Ensure no duplicate GIDs exist | prompt user
+      debug:
+        msg: >
+          Please review the output of section 6.2.14 at {{ outputfiles }}/6.2.14
+      when:
+        - output_6_2_14.stdout
   tags:
     - section6
     - level_1_server
@@ -524,6 +602,12 @@
       copy:
         dest: "{{ outputfiles }}/6.2.15"
         content: "{{ output_6_2_15.stdout_lines }}"
+    - name: 6.2.15 Ensure no duplicate user names exist | prompt user
+      debug:
+        msg: >
+          Please review the output of section 6.2.15 at {{ outputfiles }}/6.2.15
+      when:
+        - output_6_2_15.stdout
   tags:
     - section6
     - level_1_server
@@ -543,6 +627,12 @@
       copy:
         dest: "{{ outputfiles }}/2.6.16"
         content: "{{ output_6_2_16 }}"
+    - name: 6.2.16 Ensure no duplicate group names exist | prompt user
+      debug:
+        msg: >
+          Please review the output of section 6.2.16 at {{ outputfiles }}/6.2.16
+      when:
+        - output_6_2_16.stdout
   tags:
     - section6
     - level_1_server
@@ -561,6 +651,12 @@
       copy:
         dest: "{{ outputfiles }}/6.2.17"
         content: "{{ output_6_2_17 }}"
+    - name: 6.2.17 Ensure shadow group is empty | prompt user
+      debug:
+        msg: >
+          Please review the output of section 6.2.17 at {{ outputfiles }}/6.2.17
+      when:
+        - output_6_2_17.stdout
   tags:
     - section6
     - level_1_server

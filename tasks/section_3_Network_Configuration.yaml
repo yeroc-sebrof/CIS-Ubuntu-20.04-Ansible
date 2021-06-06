@@ -551,24 +551,12 @@
 # documentation and set any restrictions in compliance with site policy
 - name: 3.5.1.6 Ensure firewall rules exist for all open ports
   block:
-    - name: 3.5.1.6 Ensure firewall rules exist for all open ports | ssh
-      ufw:
-        rule: allow
-        proto: tcp
-        port: "22"
-    - name: 3.5.1.6 Ensure firewall rules exist for all open ports | dns
-      ufw:
-        rule: allow
-        proto: "{{ item }}"
-        port: "53"
-      loop:
-        - tcp
-        - udp
     - name: 3.5.1.6 Ensure firewall rules exist for all open ports | defined ports
       ufw:
         rule: "{{ item.rule }}"
         port: "{{ item.port }}"
         proto: "{{ item.proto }}"
+        direction: "{{ item.direction }}"
       with_items: "{{ firewall_list_of_ports_to_allow }}"
     - name: 3.5.1.6 Ensure firewall rules exist for all open ports | keep_alived (1)
       ufw:
@@ -611,8 +599,15 @@
     - level_1_server
     - level_1_workstation
     - 3.5.1.7
+
 # 3.5.2 Configure nftables
 # 3.5.2.1 Ensure nftables is installed
+# - name: 3.5.2.1 Ensure nftables is installed
+#       apt:
+#         name: nftables
+#         state: present
+#         install_recommends: false
+
 # 3.5.2.2 Ensure Uncomplicated Firewall is not installed or disabled
 # 3.5.2.3 Ensure iptables are flushed
 # 3.5.2.4 Ensure a table exists

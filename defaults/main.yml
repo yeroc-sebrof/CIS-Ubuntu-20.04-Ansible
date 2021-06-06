@@ -10,6 +10,8 @@ disable_hfsplus: yes
 disable_udf: yes
 disable_fat: yes
 temp_dir_size: 1G
+disable_autofs: true
+disable_usb: true
 ## 1.5.1 Ensure bootloader password is set (using grub): default is no
 set_bootloader_credentials: no
 ### Update the default bootloader user and password
@@ -17,9 +19,14 @@ bootloader_credentials: { user: "root", password: "b00tl04derPwd" }
 # 1.5.3 Ensure authentication required for single user mode
 set_root_password: yes
 root_password: r00tP4ssw0rd
+# 1.7.1.1
+install_apparmor: true
 ## 1.8.1.4 Ensure permissions on /etc/motd are configured: allow for custom motd template (if the file doesn't exist, the
 ## default template in files/templates/motd.j2 will be used)
 custom_motd_file_path: "{{ inventory_dir }}/custom_templates/motd_custom.txt"
+custom_issue_file_path: "{{ inventory_dir }}/custom_templates/motd_custom.txt"
+custom_issue_net_file_path: "{{ inventory_dir }}/custom_templates/motd_custom.txt"
+custom_greeter_file_path: "{{ inventory_dir }}/custom_templates/greeter.dconf-defaults.j2"
 
 # Section 2 Settings
 ##Setting for systemd-timesyncd
@@ -56,7 +63,9 @@ chronyservers:
 chrony_keys: /etc/chrony/chrony.keys
 chrony_log_dir: /var/log/chrony
 
-web_server_name: nginx
+web_server_names:
+  - nginx
+  - apache2
 remove_HTTPserver: no
 remove_xinetd: yes
 remove_openbsd_inetd: yes
@@ -88,7 +97,10 @@ IPv6_is_enabled: yes
 enable_firewall: yes
 ## 3.5.1.6 Ensure firewall rules exist for all open ports | defined ports
 firewall_list_of_ports_to_allow:
-  - { rule: "allow", port: "8080", proto: "tcp" }
+  - { rule: "allow", port: "22", proto: "tcp", direction: "in" }
+  - { rule: "allow", port: "53", proto: "tcp", direction: "in" }
+  - { rule: "allow", port: "53", proto: "udp", direction: "in" }
+  - { rule: "allow", port: "8080", proto: "tcp", direction: "in" }
 ## 3.5.1.6 Ensure firewall rules exist for all open ports | keep_alived
 firewall_allow_keep_alive: no
 
@@ -114,6 +126,10 @@ grub_backlog_limit: 8192
 # Section 5 settings
 ## 5.1.8 Ensure cron is restricted to authorized users
 allowd_hosts: "ALL: 0.0.0.0/0.0.0.0, 192.168.2.0/255.255.255.0"
+## 5.2.6 Ensure SSH MaxAuthTries is set to 4 or less
+max_auth_tries: 4
+## 5.2.12 Ensure only strong Ciphers are used
+ssh_ciphers: "chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr"
 ## 5.2.13 Ensure only strong MAC algorithms are used
 ssh_MACs: "hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512,hmac-sha2-256"
 ## 5.2.14 Ensure only strong Key Exchange algorithms are used
@@ -150,8 +166,5 @@ adminGroup: root
 withoutOwnerFileDirOwner: root
 withoutGroupFilesDirGroup: root
 outputfiles: /root/ #Output dir of some command
-disable_autofs: true
-disable_usb: true
-install_apparmor: true
 ## 6.2.7 Ensure users' dot files are not group or world accessible
 fix_dot_file_permissions: yes
