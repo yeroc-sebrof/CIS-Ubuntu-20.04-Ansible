@@ -44,7 +44,7 @@
   replace:
     dest: /etc/default/grub
     regexp: '^(GRUB_CMDLINE_LINUX=(?!.*audit_backlog_limit)\"[^\"]*)(\".*)'
-    replace: '\1 audit_backlog_limit=grub_backlog_limit\2'
+    replace: '\1 audit_backlog_limit={{grub_backlog_limit}}\2'
   tags:
     - section4
     - level_2_server
