@@ -23,10 +23,10 @@ root_password: r00tP4ssw0rd
 install_apparmor: true
 ## 1.8.1.4 Ensure permissions on /etc/motd are configured: allow for custom motd template (if the file doesn't exist, the
 ## default template in files/templates/motd.j2 will be used)
-custom_motd_file_path: "{{ inventory_dir }}/custom_templates/motd_custom.txt"
-custom_issue_file_path: "{{ inventory_dir }}/custom_templates/motd_custom.txt"
-custom_issue_net_file_path: "{{ inventory_dir }}/custom_templates/motd_custom.txt"
-custom_greeter_file_path: "{{ inventory_dir }}/custom_templates/greeter.dconf-defaults.j2"
+custom_motd_file_path: "files/custom_templates/motd_custom.txt"
+custom_issue_file_path: "files/custom_templates/motd_custom.txt"
+custom_issue_net_file_path: "files/custom_templates/motd_custom.txt"
+custom_greeter_file_path: "files/custom_templates/greeter.dconf-defaults.j2"
 
 # Section 2 Settings
 ##Setting for systemd-timesyncd

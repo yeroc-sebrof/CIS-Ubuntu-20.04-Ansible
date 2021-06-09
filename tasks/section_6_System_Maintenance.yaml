@@ -219,7 +219,7 @@
         msg: >
           Please review the output of section 6.1.14 at {{ outputfiles }}/6.1.14
       when:
-        - output_6_2_1.stdout
+        - output_6_1_14.stdout
     # - name: 6.1.14 Audit SGID executables | fix
     #   file:
     #     path: "{{ item }}"
