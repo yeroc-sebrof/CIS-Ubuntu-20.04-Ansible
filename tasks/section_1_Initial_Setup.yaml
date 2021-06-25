@@ -805,7 +805,6 @@
         insertbefore: "# End of file"
     - name: 1.6.4 Ensure core dumps are restricted | reload
       shell: systemctl daemon-reload
-  when: not reversing
   tags:
     - section1
     - level_1_server
